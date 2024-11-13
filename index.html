@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cartly</title>
-  <link rel="stylesheet" href="../Css/style.css">
-</head>
-<body>
-  
-  <div class="main">
-    <img src="../Assets/Images/ic_logo.jpeg" alt="Logo" id="ic_logo">
-    <h2>Cartly</h2>
-    <form action="" id="sign_up">
-      <label for="email">E-mail :</label>
-      <input type="email" id="email" required>
-      <sapn id="emailError"></sapn>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cartly</title>
+    <link rel="stylesheet" href="../Css/style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <img src="../Assets/Images/ic_logo.jpeg" alt="Logo" id="ic_logo" />
+      <h2>Cartly</h2>
+      <form action="" id="form">
+        <div id="input_group">
+          <label for="email">E-mail :</label>
+          <input type="email" id="email" required />
+          <span class="error"></span>
+        </div>
 
+        <div id="input_group">
+          <label for="password">Password :</label>
+          <input type="password" id="password" />
+          <span class="error"></span>
+        </div>
 
-      <label for="password">Password :</label>
-      <input type="password">
-      span#
-      <div class="wrap">
-        <button id="Btn">Login</button>
-      </div>
-    </form>
-    <a href="sign_up.html">Create an account</a>
-  </div>
-</body>
+        <div class="wrap">
+          <button id="Btn" type="submit">Login</button>
+        </div>
+      </form>
+      <a href="../Html/sign_up.html">Create an account</a>
+    </div>
+  </body>
 </html>

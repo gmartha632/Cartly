@@ -1,52 +1,68 @@
-const form = document.getElementById("signupForm");
-form.setAttribute("novalidate", true);
+// Correctly reference the form and input elements by their IDs
+const form = document.getElementById("form");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
-const confirmPassword = document.getElementById("confirmPassword");
-const emailError = document.getElementById("emailError");
-const passwordError = document.getElementById("passwordError");
-const confirmPasswordError = document.getElementById("confirmPasswordError");
 
-form.addEventListener("submit", function(event) {
-  // Reset errors
-  emailError.textContent = "";
-  passwordError.textContent = "";
-  confirmPasswordError.textContent = "";
+// Event listener for form submission
+form.addEventListener("submit", (event) => {
+  if (!validateInputs()) {
+    event.preventDefault();  // Prevent form submission if validation fails
+  }
+});
+
+// Function to validate inputs (email and password for login)
+function validateInputs() {
+  const emailVal = email.value.trim();
+  const passwordVal = password.value.trim();
   
-  if (!email.validity.valid) {
-    if (email.validity.valueMissing) {
-      emailError.textContent = "Email is required!";
-    } else if (email.validity.typeMismatch) {
-      emailError.textContent = "Please enter a valid email address!";
-    }
-    event.preventDefault();
+  let success = true;
+
+  // Email check
+  if (emailVal === "") {
+    success = false;
+    setError(email, "Email is required");
+  } else if (!validateEmail(emailVal)) {
+    success = false;
+    setError(email, "Please enter a valid email address");
+  } else {
+    setSuccess(email);
   }
 
-  if (!password.checkValidity()) {
-    if (password.validity.valueMissing) {
-      passwordError.textContent = "Password is required!";
-    } else if (password.validity.tooShort) {
-      passwordError.textContent = "Password must be at least 8 characters long!";
-    }
-    event.preventDefault();
+  // Password check
+  if (passwordVal === "") {
+    success = false;
+    setError(password, "Password is required");
+  } else if (passwordVal.length < 8) {
+    success = false;
+    setError(password, "Password must be at least 8 characters long");
+  } else {
+    setSuccess(password);
   }
 
-  if (password.value !== confirmPassword.value) {
-    confirmPasswordError.textContent = "Passwords do not match!";
-    event.preventDefault();
-  }
-});
+  return success;
+}
 
-password.addEventListener("input", function() {
-  passwordError.textContent = "";
-  if (password.validity.tooShort) {
-    passwordError.textContent = `Password must be at least ${password.minLength} characters; you entered ${password.value.length}.`;
-  }
-});
+// Function to set error message
+function setError(element, message) {
+  const inputGroup = element.parentElement;
+  const errorElement = inputGroup.querySelector(".error");
 
-confirmPassword.addEventListener("input", function() {
-  confirmPasswordError.textContent = "";
-  if (confirmPassword.value !== password.value) {
-    confirmPasswordError.textContent = "Passwords do not match!";
-  }
-});
+  errorElement.innerText = message;
+}
+
+// Function to set success (clear error message)
+function setSuccess(element) {
+  const inputGroup = element.parentElement;
+  const errorElement = inputGroup.querySelector(".error");
+
+  errorElement.innerText = "";  // Clear any existing error messages
+}
+
+// Email validation regex
+const validateEmail = (email) => {
+  return String(email)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
