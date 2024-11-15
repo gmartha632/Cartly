@@ -56,7 +56,14 @@ button {
   font-size: 16px;
 }
 
- #input_group .error {
+#input_group{
+  box-sizing: border-box;
+  margin-left: 150px;
+}
+
+#input_group .error{
   color: red;
   font-size: 16px;
+  margin-top: 5px;
+
 }

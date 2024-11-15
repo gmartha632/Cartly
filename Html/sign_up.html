@@ -10,29 +10,35 @@
     <div class="main">
       <img src="../Assets/Images/ic_logo.jpeg" alt="Logo" id="ic_logo" />
       <h2>Cartly</h2>
-      <form action="" id="form">
+      <form action="" id="form" novalidate>
+        <div id="input_group">
+          <label for="username">Username :</label>
+          <input type="text" id="username"  required/>
+          <div class="error"></div>
+        </div>
         <div id="input_group">
           <label for="email">E-mail :</label>
-          <input type="email" id="email" required />
+          <input type="email" id="email"  required/>
           <span class="error"></span>
         </div>
 
         <div id="input_group">
           <label for="password">Password :</label>
-          <input type="password" id="password" />
+          <input type="password" id="password" required />
           <span class="error"></span>
         </div>
 
         <div id="input_group">
-            <label for="password"> Confirm Password :</label>
-            <input type="password" id="Cpassword" />
-            <span class="error"></span>
+          <label for="password"> Confirm Password :</label>
+          <input type="password" id="C_password" required />
+          <span class="error"></span>
         </div>
         <div class="wrap">
-          <button id="Btn" type="submit">Login</button>
+          <button id="Btn" type="submit">Sign up</button>
         </div>
       </form>
-      <a href="../index.html">Create an account</a>
+      <p>Already have an account ? <a href="../index.html">Sign in</a></p>
     </div>
+    <script src="../Javascript/script.js"></script>
   </body>
 </html>

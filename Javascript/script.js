@@ -1,23 +1,30 @@
-// Correctly reference the form and input elements by their IDs
 const form = document.getElementById("form");
+let username = document.getElementById("username");
+
 const email = document.getElementById("email");
 const password = document.getElementById("password");
-
-// Event listener for form submission
+const Cpassword = document.getElementById("C_password");
 form.addEventListener("submit", (event) => {
   if (!validateInputs()) {
-    event.preventDefault();  // Prevent form submission if validation fails
+    event.preventDefault();
   }
 });
 
-// Function to validate inputs (email and password for login)
 function validateInputs() {
-  const emailVal = email.value.trim();
+  const usernameVal = username.value.trim();
+   const emailVal = email.value.trim();
   const passwordVal = password.value.trim();
+  const CpasswordVal = Cpassword ? Cpassword.value.trim() : "";
+    success = true;
+    if (usernameVal == "") {
+      success = false;
+      setError(username, "Username is required");
+    } else {
+      setSuccess(username);
+    }
   
-  let success = true;
+  
 
-  // Email check
   if (emailVal === "") {
     success = false;
     setError(email, "Email is required");
@@ -28,37 +35,42 @@ function validateInputs() {
     setSuccess(email);
   }
 
-  // Password check
   if (passwordVal === "") {
     success = false;
     setError(password, "Password is required");
   } else if (passwordVal.length < 8) {
     success = false;
-    setError(password, "Password must be at least 8 characters long");
+    setError(password, "Password must be atleast 8 characters long");
   } else {
     setSuccess(password);
   }
 
+ 
+  if (CpasswordVal === "") {
+    success = false;
+    setError(Cpassword, " Confirm Password is required");
+  } else if (CpasswordVal !== passwordVal) {
+    success = false;
+    setError(Cpassword, "Password does not match");
+  } else {
+    setSuccess(Cpassword);
+  }
+ 
+
   return success;
 }
 
-// Function to set error message
 function setError(element, message) {
-  const inputGroup = element.parentElement;
-  const errorElement = inputGroup.querySelector(".error");
-
+  const InputGroup = element.parentElement;
+  const errorElement = InputGroup.querySelector(".error");
   errorElement.innerText = message;
 }
-
-// Function to set success (clear error message)
 function setSuccess(element) {
-  const inputGroup = element.parentElement;
-  const errorElement = inputGroup.querySelector(".error");
-
-  errorElement.innerText = "";  // Clear any existing error messages
+  const InputGroup = element.parentElement;
+  const errorElement = InputGroup.querySelector(".error");
+  errorElement.innerText = "";
 }
 
-// Email validation regex
 const validateEmail = (email) => {
   return String(email)
     .toLowerCase()
@@ -66,3 +78,5 @@ const validateEmail = (email) => {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 };
+
+
