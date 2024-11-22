@@ -39,7 +39,7 @@ form.addEventListener("submit", (event) => {
         const user = userCredential.user;
         console.log("User logged in:", user);
         // Redirect to dashboard or another page upon success
-        window.location.href = "/dashboard"; // Replace with your actual target page
+        window.location.href="../Html/Homepage.html"
       })
       .catch((error) => {
         const errorCode = error.code;
