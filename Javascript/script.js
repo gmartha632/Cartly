@@ -42,7 +42,7 @@
             .then(async (userCredential) => {
               const user = userCredential.user;
               console.log("User signed up:", user);
-              window.location.href="../Html/Homepage.html"
+              window.location.href="../Html/dashbaord.html"
               // Save additional details (username) to Firestore
               try {
                 await setDoc(doc(db, "users", user.uid), {
