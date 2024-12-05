@@ -1,3 +1,4 @@
+/* Reset and basic styling */
 * {
     margin: 0;
     padding: 0;
@@ -6,14 +7,17 @@
 
 body {
     font-family: Arial, sans-serif;
+    background-color: #f9f9f9; /* Light background for better contrast */
 }
 
+/* Header Styling */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    
+    background-color: #fff; /* Ensuring header background is white */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 header>div:first-child {
@@ -27,25 +31,16 @@ header>div:last-child {
     align-items: center;
     gap: 50px;
     padding-right: 40px;
-
 }
 
 header img {
     height: 40px;
 }
 
- .logout .logout-button{
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-}
 .search-bar {
     display: flex;
     align-items: center;
-    border: 1px solid #ccc ;
+    border: 1px solid #ccc;
     border-radius: 25px;
     padding: 5px 10px;
     width: 700px;
@@ -68,12 +63,14 @@ header img {
     align-items: center;
 }
 
+/* Navbar Styling */
 .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 10px 20px;
-
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar a {
@@ -83,18 +80,103 @@ header img {
     font-size: 16px;
 }
 
-#logout-button {
-    background: none; 
-    border: none; 
-    padding: 0; 
-    margin: 0; 
-    cursor: pointer; 
-    display: inline-block; 
+/* Horizontal line */
+hr {
+    border: 0;
+    height: 3.5px;
+    background-color: black;
 }
 
-#logout-button img {
-    display: block; 
+/* Product Carousel Container */
+.product-carousel-container {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 30px;  /* Spacing from navbar */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto; /* Center the carousel */
 }
 
+/* Carousel Wrapper */
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+}
 
+/* Individual Product Slide */
+.carousel-slide {
+    min-width: 33.3333%; /* Display 3 products at a time */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+}
 
+.carousel-slide img {
+    width: 70%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.product-details {
+    text-align: center;
+    padding: 10px;
+}
+
+.product-details h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.product-details p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Navigation Buttons */
+button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .carousel-slide {
+        min-width: 50%; /* 2 products at a time */
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-slide {
+        min-width: 100%; /* 1 product at a time */
+    }
+}

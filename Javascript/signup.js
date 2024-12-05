@@ -42,7 +42,7 @@
             .then(async (userCredential) => {
               const user = userCredential.user;
               console.log("User signed up:", user);
-              window.location.href="../Html/dashbaord.html"
+              window.location.href="../Html/dashboard.html"
               // Save additional details (username) to Firestore
               try {
                 await setDoc(doc(db, "users", user.uid), {
@@ -54,7 +54,7 @@
 
                 // Redirect the user to Homepage.html after successful registration
                 alert("Registration successful! Please check your email for verification.");
-                window.location.href="../Html/Homepage.html"
+                window.location.href="../Html/dashboard.html"
               } catch (error) {
                 console.error("Error saving user details to Firestore:", error);
                 alert("Error saving user details: " + error.message);
