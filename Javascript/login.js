@@ -13,6 +13,8 @@ const firebaseConfig = {
   measurementId: "G-4LPYG75NPM",
 };
 
+
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
@@ -49,16 +51,7 @@ form.addEventListener("submit", (event) => {
   }
 });
 
-// // Handle Firebase login errors (no alerts)
-// function handleFirebaseError(error) {
-//   const errorCode = error.code;
 
-//   if (errorCode === 'auth/wrong-password' || errorCode === 'auth/user-not-found') {
-//     setError(password, "Enter valid email or password");
-//   } else {
-//     setError(password, "An unexpected error occurred");
-//   }
-// }
 
 // Form validation
 function validateInputs() {

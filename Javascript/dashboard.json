@@ -1,5 +1,18 @@
-[
-    {
-        "product": "Shirt"
-    }
-]
+{
+    "book":[
+        {
+            "book_img":"",
+            "book_name":"",
+            "book_price":""
+        }
+    ],
+    "stationery":[
+        {
+            "parker_pen_img":"",
+            "parker_pen_name":"",
+            "parker_pen_price" :""
+
+        }
+    ]
+
+}
