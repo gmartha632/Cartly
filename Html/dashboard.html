@@ -2,50 +2,97 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartly</title>
-    <link rel="stylesheet" href="../Css/dashboard.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartly</title>
+  <link rel="stylesheet" href="../Css/dashboard.css">
+  <!-- Cdn Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 
 <body>
-    <header>
-        <div>
-            <img src="../Assets/Images/ic_logo.jpeg" alt="Cartly_logo">
-            <h2>Cartly</h2>
-        </div>
-        <div class="search-bar">
-            <input type="text" placeholder="Search here..." id="search-input">
-            <button id="search-button">
-                <img src="../Assets/Images/ic_search.png" alt="Search Icon">
-            </button>
-        </div>
-        
-        <div id="logout">
-            <img src="../Assets/Images/ic_shoppingCart.png" alt="Shoppping_logo">
-           <button  id="logout-button">
-            <img src="../Assets/Images/ic_logout.png" alt="logout_icon">
-          </button>
-        </div>
-    </header>
-    <hr>
-    <div class="navbar">
-          <a href="#Books.html">Books</a>
-          <a href="#statoinery.html">Stationery</a>
-          <a href="#Electronics.html">Electronics</a>
-          <a href="#sports.html">Sports & Extracurricular Gear</a>
-          <a href="#study.html">Study Essentials</a>
-       
-      </div>
-      <hr>
-      
-      
+  <header>
+    <div>
+      <img src="../Assets/Images/ic_logo.jpeg" alt="Cartly_logo">
+      <h2>Cartly</h2>
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search here..." id="search-input">
+      <button id="search-button">
+        <img src="../Assets/Images/ic_search.png" alt="Search Icon">
+      </button>
+    </div>
 
-     
-      
+    <div id="logout">
+      <button class="cart">
+        <img src="../Assets/Images/ic_shoppingCart.png" alt="Shoppping_logo">
+      </button>
+      <button id="logout-button">
+        <img src="../Assets/Images/ic_logout.png" alt="logout_icon">
+      </button>
+    </div>
+  </header>
 
-</body>
+
+  <div class="navbar">
+
+    <a href="#Books.html">Books</a>
+    <a href="#statoinery.html">Stationery</a>
+    <a href="#Electronics.html">Electronics</a>
+    <a href="#sports.html">Sports & Extracurricular Gear</a>
+    <a href="#study.html">Study Essentials</a>
+
+  </div>
+
+
+
+  <div class="wrapper">
+    <i id="left" class="fa-solid  fas fa-angle-left"></i>
+    <ul class="carousel">
+      <!-- Book -->
+      <li class="card">
+        <div class="img"><img src="../Assets/Images/Computerbook.png" alt="" draggable="false"> </div>
+        <h2>
+          Python Book
+        </h2>
+        <span>RS.645</span>
+      </li>
+      <!--Stationery  -->
+      <li class="card">
+        <div class="img"><img src="../Assets/Images/Hero Pen.jpg" alt=""
+            draggable="false"> </div>
+        <h2 >Hero Pen</h2>
+        <span>Rs.100</span>
+      </li>
+      <li class="card">
+        <div class="img"><img src="../Assets/Images/Laptop.png" alt=""
+            draggable="false"> </div>
+        <h2>Laptop</h2>
+        <span>Rs.45000</span>
+      </li>
+      <li class="card">
+        <div class="img"><img src="../Assets/Images/Football.png" alt=""
+            draggable="false"> </div>
+        <h2 >Football</h2>
+        <span>Rs.999</span>
+      </li>
+      <li class="card">
+        <div class="img"><img src="../Assets/Images/Table.png" alt=""
+            draggable="false"> </div>
+        <h2 >Table</h2>
+        <span>3000</span>
+      </li>
+
+    </ul>
+    <i id="right" class="fa-solid fas fa-angle-right"></i>
+  </div>
+
+
   <script src="../Javascript/dashbaord.js">
 
   </script>
+
+</body>
+
+
 </html>
