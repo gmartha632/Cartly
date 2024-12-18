@@ -7,7 +7,9 @@
   <title>Cartly</title>
   <link rel="stylesheet" href="../Css/dashboard.css">
   <!-- Cdn Link -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -19,16 +21,19 @@
     <div class="search-bar">
       <input type="text" placeholder="Search here..." id="search-input">
       <button id="search-button">
-        <img src="../Assets/Images/ic_search.png" alt="Search Icon">
+        <i class="fa-solid fa-magnifying-glass"></i>
+
       </button>
     </div>
 
     <div id="logout">
       <button class="cart">
-        <img src="../Assets/Images/ic_shoppingCart.png" alt="Shoppping_logo">
+        <p><i class="fa-solid fa-cart-shopping"></i></p>
       </button>
       <button id="logout-button">
-        <img src="../Assets/Images/ic_logout.png" alt="logout_icon">
+
+        <p><i class="fa-solid fa-user"></i></p>
+
       </button>
     </div>
   </header>
@@ -36,59 +41,24 @@
 
   <div class="navbar">
 
-    <a href="#Books.html">Books</a>
-    <a href="#statoinery.html">Stationery</a>
-    <a href="#Electronics.html">Electronics</a>
-    <a href="#sports.html">Sports & Extracurricular Gear</a>
-    <a href="#study.html">Study Essentials</a>
+    <a href="Categories.html">Books</a>
+    <a href="Categories.html">Stationery</a>
+    <a href="Categories.html">Electronics</a>
+    <a href="Categories.html">Sports & Extracurricular Gear</a>
+    <a href="Categories.html">Study Essentials</a>
 
   </div>
 
 
-
   <div class="wrapper">
-    <i id="left" class="fa-solid  fas fa-angle-left"></i>
+    <i id="left" class="fa-solid fas fa-angle-left"></i>
     <ul class="carousel">
-      <!-- Book -->
-      <li class="card">
-        <div class="img"><img src="../Assets/Images/Computerbook.png" alt="" draggable="false"> </div>
-        <h2>
-          Python Book
-        </h2>
-        <span>RS.645</span>
-      </li>
-      <!--Stationery  -->
-      <li class="card">
-        <div class="img"><img src="../Assets/Images/Hero Pen.jpg" alt=""
-            draggable="false"> </div>
-        <h2 >Hero Pen</h2>
-        <span>Rs.100</span>
-      </li>
-      <li class="card">
-        <div class="img"><img src="../Assets/Images/Laptop.png" alt=""
-            draggable="false"> </div>
-        <h2>Laptop</h2>
-        <span>Rs.45000</span>
-      </li>
-      <li class="card">
-        <div class="img"><img src="../Assets/Images/Football.png" alt=""
-            draggable="false"> </div>
-        <h2 >Football</h2>
-        <span>Rs.999</span>
-      </li>
-      <li class="card">
-        <div class="img"><img src="../Assets/Images/Table.png" alt=""
-            draggable="false"> </div>
-        <h2 >Table</h2>
-        <span>3000</span>
-      </li>
-
     </ul>
     <i id="right" class="fa-solid fas fa-angle-right"></i>
   </div>
 
 
-  <script src="../Javascript/dashbaord.js">
+  <script src="../Javascript/Dashbaord.js">
 
   </script>
 

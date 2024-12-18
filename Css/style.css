@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+
+
+
 body {
   display: flex;
   flex-direction: column;
@@ -5,6 +11,7 @@ body {
   justify-content: center;
   line-height: 1.6;
   min-height: 100vh;
+  font: poppins;
 }
 
 .main {
@@ -67,3 +74,35 @@ button {
   margin-top: 5px;
 
 }
+
+
+@media (max-width: 480px) {
+  body {
+    width: 90%;
+    margin: 0 auto; /* Center the body */
+  }
+
+  h2 {
+    font-size: 1.5rem; /* Reduce the title size on very small screens */
+  }
+
+  button {
+    width: 30%; /* Increase button width on very small screens */
+    margin: 15px auto; /* Center the button and add margin around it */
+    margin-left: 160px;
+    display: block; /* Ensures the button is a block element */
+  }
+
+  .main {
+    width: 100%;
+    max-width: 400px; /* Ensure the main container doesn't grow too wide */
+    padding: 15px;
+    margin: 0 auto;
+  }
+
+  .main p {
+    text-align: center; /* Center the paragraph */
+  }
+}
+
+
