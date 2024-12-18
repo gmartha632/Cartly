@@ -1,0 +1,30 @@
+{
+    "products": [
+      {
+        "name": "Python Book",
+        "image": "../Assets/Images/Computerbook.png",
+        "price": "Rs.645"
+      },
+      {
+        "name": "Hero Pen",
+        "image": "../Assets/Images/Hero Pen.jpg",
+        "price": "Rs.100"
+      },
+      {
+        "name": "Hp IntelCore 5",
+        "image": "../Assets/Images/Laptop.png",
+        "price": "Rs.49000"
+      },
+      {
+        "name": "Nivia Dominator ",
+        "image": "../Assets/Images/Football.png",
+        "price": "Rs.1439"
+      },
+      {
+        "name": "Table",
+        "image": "../Assets/Images/Table.png",
+        "price": "Rs.3000"
+      }
+    ]
+  }
+  

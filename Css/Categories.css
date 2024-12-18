@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --fonts:poppins;
+    --background-color:#38b6ff;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+p i{
+    font-size: 20px;
+    transition: all 300ms ease;
+
+}
+p i:hover{
+    color: var(--background-color);
+    transform: scale(.9);
+}
+
+header h2{
+    font-family: var(--fonts);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 2rem;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000000;
+}
+
+header>div:first-child {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+}
+
+
+header>div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+header img {
+    height: 40px;
+}
+
+/* Remove default link styling */
+.logo-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color from parent */
+  }
+  
+  /* Optional: Style the div content as needed */
+  .logo-link div {
+    display: flex; /* Align the logo and text properly */
+    align-items: center; /* Vertically center */
+  }
+  
+  /* Optional: Adjust image size if needed */
+  .logo-link img {
+    max-width: 50px; /* Example size for the logo */
+    height: auto;
+  }
+  
+  /* Optional: Styling for the h2 text */
+  .logo-link h2 {
+    margin: 0; /* Remove default margin */
+    font-size: 24px; /* Adjust size */
+    color: inherit; /* Ensure the text color matches the surrounding content */
+  }
+  
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 5px 10px;
+    width: 650px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 16px;
+    padding: 5px;
+    font-family: var(--fonts);
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color:var(--background-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    position: relative;
+    font-family: var(--fonts);
+    z-index: 20000;
+}
+
+.navbar a {
+    color: black;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    transition: all 300ms ease;
+}
+
+.navbar a:hover{
+    color: white;
+    transform: scale(.95);
+
+}
+.navbar a:active{
+    font-weight: bold;
+    transform: scale(1.03);
+    
+}
+
+
+#logout-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: inline-block;
+}
+
+#logout-button img {
+    display: block;
+}
+
+
+/* Style for Carousel */
+
+
+.cart{
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
