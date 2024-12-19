@@ -41,7 +41,7 @@ form.addEventListener("submit", (event) => {
     signInWithEmailAndPassword(auth, emailVal, passwordVal)
       .then((userCredential) => {
         console.log("User logged in:", userCredential.user);
-        window.location.href = "../Html/dashboard.html"; // Redirect to dashboard
+        window.location.href = "../../index.html"; // Redirect to dashboard
       })
       .catch((error) => {
         errorElement[2].textContent = "Enter valid Password or email";

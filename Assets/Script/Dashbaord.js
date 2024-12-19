@@ -1,13 +1,13 @@
 let logout = document.getElementById("logout-button")
 // logout function
 logout.addEventListener("click",()=>{
-    window.location.href = "../index.html"
+    window.location.href = "../../Pages/Login.html"
 });
 
 
 document.addEventListener('DOMContentLoaded', () => {
   // Fetch the JSON data from the external file
-  fetch('../JSON/Products.json')
+  fetch('./Assets/Json/Products.json')
     .then(response => response.json())  // Parse the JSON response
     .then(data => {
       const products = data.products; // Access the products array
@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       products.forEach(product => {
         const productElement = document.createElement('li');
         productElement.classList.add('card');
+        
         
         productElement.innerHTML = `
           <div class="img">
