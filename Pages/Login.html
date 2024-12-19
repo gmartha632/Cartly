@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cartly</title>
+    <link rel="stylesheet" href="../Assets/Styles/style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <img src="../Assets/Images/ic_logo.jpeg" alt="Logo" id="ic_logo" />
+      <h2>Cartly</h2>
+      <form id="form" novalidate>
+        <div id="input_group">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" required />
+          <span class="error"></span>
+        </div>
+        
+
+        <div id="input_group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" required />
+          <span class="error"></span>
+        </div>
+        <span class="error"></span>
+
+        <div class="wrap">
+          <button id="Btn" type="submit">Login</button>
+        </div>
+      </form>
+      <p>Don't have an account? <a href="/Pages/Sign_up.html">Create an account</a></p>
+    </div>
+    <script type="module" src="../Assets/Script/Login.js"></script>
+  </body>
+</html>

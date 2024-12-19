@@ -1,36 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cartly</title>
-    <link rel="stylesheet" href="../Css/style.css" />
-  </head>
-  <body>
-    <div class="main">
-      <img src="../Assets/Images/ic_logo.jpeg" alt="Logo" id="ic_logo" />
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartly</title>
+  <link rel="stylesheet" href="./Assets/Styles/Dashboard.css">
+  <!-- Cdn Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <header>
+    <div>
+      <img src="./Assets/Images/ic_logo.jpeg" alt="Cartly_logo">
       <h2>Cartly</h2>
-      <form id="form" novalidate>
-        <div id="input_group">
-          <label for="email">E-mail:</label>
-          <input type="email" id="email" required />
-          <span class="error"></span>
-        </div>
-        
-
-        <div id="input_group">
-          <label for="password">Password:</label>
-          <input type="password" id="password" required />
-          <span class="error"></span>
-        </div>
-        <span class="error"></span>
-
-        <div class="wrap">
-          <button id="Btn" type="submit">Login</button>
-        </div>
-      </form>
-      <p>Don't have an account? <a href="../Html/sign_up.html">Create an account</a></p>
     </div>
-    <script type="module" src="../Javascript/login.js"></script>
-  </body>
+    <div class="search-bar">
+      <input type="text" placeholder="Search here..." id="search-input">
+      <button id="search-button">
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+      </button>
+    </div>
+
+    <div id="logout">
+      <button class="cart">
+        <p><i class="fa-solid fa-cart-shopping"></i></p>
+      </button>
+      <button id="logout-button">
+
+        <p><i class="fa-solid fa-user"></i></p>
+
+      </button>
+    </div>
+  
+  </header>
+                                                                                                                                                                            
+
+  <div class="navbar">
+
+    <a href="./Pages/Categories.html">Books</a>
+    <a href="./Pages/Categories.html">Stationery</a>
+    <a href="./Pages/Categories.html">Electronics</a>
+    <a href="./Pages/Categories.html">Sports & Extracurricular Gear</a>
+    <a href="./Pages/Categories.html">Study Essentials</a>
+
+  </div>
+
+
+  <div class="wrapper">
+    <i id="left" class="fa-solid fas fa-angle-left"></i>
+    <ul class="carousel">
+    </ul>
+    <i id="right" class="fa-solid fas fa-angle-right"></i>
+  </div>
+
+
+  <script src="./Assets/Script/Dashbaord.js">
+
+  </script>
+
+</body>
+
+
 </html>

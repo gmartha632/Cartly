@@ -42,7 +42,7 @@ form.addEventListener("submit", (event) => {
       .then(async (userCredential) => {
         const user = userCredential.user;
         console.log("User signed up:", user);
-        window.location.href = "../Html/dashboard.html"
+        window.location.href = "../../index.html"
         // Save additional details (username) to Firestore
         try {
           await setDoc(doc(db, "users", user.uid), {
