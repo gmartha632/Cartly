@@ -1,35 +1,51 @@
 let logout = document.getElementById("logout-button")
 // logout function
-logout.addEventListener("click",()=>{
-    window.location.href = "../../Pages/Login.html"
+logout.addEventListener("click", () => {
+  window.location.href = "../../Pages/Login.html"
+});
+
+// Cart navigation
+let cart = document.getElementById('cart-icon') ;
+cart.addEventListener('click', () => {
+  window.location.href = '../../Pages/Cart.html'; 
 });
 
 
+
 document.addEventListener('DOMContentLoaded', () => {
-  // Fetch the JSON data from the external file
-  fetch('./Assets/Json/Products.json')
-    .then(response => response.json())  // Parse the JSON response
+  fetch('https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/sign/Product-JSON/Products.json?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJQcm9kdWN0LUpTT04vUHJvZHVjdHMuanNvbiIsImlhdCI6MTczNjEwNzA0OCwiZXhwIjoyMDUxNDY3MDQ4fQ.LAbnKkRpdODXT5x8bRY0YdZaayFwSgCCw4ngsMdIPa8') .then(response => response.json())  // Parse the JSON response
     .then(data => {
       const products = data.products; // Access the products array
       const carousel = document.querySelector('.carousel');
       const arrowBtns = document.querySelectorAll('.wrapper i');
       const wrapper = document.querySelector('.wrapper');
-
+       console.log(products)
       // Append products to the carousel
       products.forEach(product => {
         const productElement = document.createElement('li');
         productElement.classList.add('card');
-        
-        
-        productElement.innerHTML = `
-          <div class="img">
+        productElement.setAttribute('data-id', product.name);
+
+        productElement.innerHTML = `    <div class="img">
             <img src="${product.image}" alt="${product.name}" draggable="false">
           </div>
           <h2>${product.name}</h2>
-          <span>${product.price}</span>
-        `;
-        
-        carousel.appendChild(productElement);
+          <span>${product.price}</span> `
+
+          ;
+       carousel.appendChild(productElement);
+       console.log(productElement.dataset.id)
+       productElement.addEventListener('click', function () {
+        const productId = productElement.dataset.id;  // Get the unique product ID
+        if (productId) {
+          // Navigate to Description.html, passing the product ID as a query parameter
+          window.location.href = ` ../../Pages/Description.html?id=${encodeURIComponent(productId)}`;
+        } else {
+          console.error('Product ID is missing!');
+        }
+      });
+
+      
       });
 
       // Recalculate firstCardWidth after appending products
@@ -37,12 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const firstCardWidth = firstCard.offsetWidth;
 
       let isDragging = false,
-          startX,
-          startScrollLeft,
-          timeoutId;
+        startX,
+        startScrollLeft,
+        timeoutId;
 
       // Dragging logic
-      const dragStart = (e) => { 
+      const dragStart = (e) => {
         isDragging = true;
         carousel.classList.add('dragging');
         startX = e.pageX;
@@ -67,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       const dragStop = () => {
-        isDragging = false; 
+        isDragging = false;
         carousel.classList.remove('dragging');
       };
 
@@ -85,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (carousel.scrollLeft >= maxScrollLeft) return;
 
         // Autoplay the carousel after every 2500ms
-        timeoutId = setTimeout(() => 
+        timeoutId = setTimeout(() =>
           carousel.scrollLeft += firstCardWidth, 2500);
       };
 
@@ -104,8 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     })
     .catch(error => console.error('Error fetching the JSON:', error));
+
+
+
+
 });
-
-  
-
 
