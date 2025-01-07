@@ -137,129 +137,79 @@ p i:hover{
 }
 
 
-/* Carousel */
+/* Cart item */
 
-.wrapper {
-    max-width: 1100px;
-    width: 100%;
-    position: relative;
-    margin-top: 230px;
-    left: 230px;
-    font-family: var(--fonts);
-
-}
-
-.wrapper i {
-    height: 50px;
-    width: 50px;
+/* Layout for the cart item */
+.cart-item {
+    display: flex;
+    align-items: center; /* Align items horizontally */
+    justify-content: space-between; /* Distribute space between items */
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Image styling */
+  .cart-item img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px; /* Space between image and description */
+  }
+  
+  /* Container for the product details */
+  .cart-item-details {
+    display: flex;
+    flex-direction: column; /* Stack text elements vertically */
+    justify-content: flex-start;
+    flex-grow: 1;
+    margin-right: 20px; /* Space between details and quantity */
+  }
+  
+  .cart-item-description {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px; /* Space between description and quantity */
+  }
+  
+  /* Quantity and buttons container */
+  .cart-item-quantity {
+    display: flex;
+    align-items: center;
+  }
+  
+  .cart-item-quantity button {
+    padding: 5px;
+    margin: 0 10px;
+    background-color: #ddd;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  
+  .cart-item-quantity input {
+    width: 40px;
     text-align: center;
-    line-height: 50px;
-    border-radius: 20%;
+    padding: 5px;
+  }
+  
+  /* Remove button */
+  .remove-item {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
     cursor: pointer;
-    position: absolute;
-    top: 50%;
-    font-size: 1.25 rem;
-    transform: translateY(-50%);
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
-
-
-}
-
-.wrapper i:first-child {
-    left: -22px;
-
-}
-
-.wrapper i:last-child {
-    right: -22px;
-
-}
-
-.wrapper .carousel {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: calc((100% / 3) - 12px);
-    gap: 20px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: 0;
-
-
-}
-
-.carousel::-webkit-scrollbar {
-    display: none;
-}
-
-.carousel :where(.card, .img) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.carousel.dragging {
-    scroll-snap-type: none;
-    scroll-behavior: auto;
-}
-
-.carousel.no-transition {
-    scroll-behavior: auto;
-}
-
-.carousel.dragging .card {
-    cursor: grab;
-    user-select: none;
-}
-
-.carousel .card {
-    scroll-snap-align: start;
-    height: 340px;
-    list-style: none;
-    background: #fff;
-    border-radius: 8px;
-    display: flex;
-    cursor: pointer;
-    width: 98%;
-    padding-bottom: 15px;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-}
-
-
-
-.card .img img {
-    width: 140px;
-    height: 140px;
-    object-fit: cover;
-    border: 4px solid #fff;
-}
-
-.card h2 {
-    font-weight: 500;
-    font-size: 1.56rem;
-    margin: 30px 0 5px;
-}
-
-.card span {
-    color: #6a6d78;
-    font-size: 1.31rem;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    border-radius: 3px;
+    margin-left: 20px; /* Space between remove button and other elements */
+    width: 100px;
+  }
+  
+  /* Price styling */
+  .cart-item-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 20px; /* Space between price and other elements */
+  }
+  

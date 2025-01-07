@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cartly</title>
   <link rel="stylesheet" href="./Assets/Styles/Dashboard.css">
-  <!-- Cdn Link -->
+  <!-- Cdn Link  for Font-Style -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
     integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -14,47 +14,59 @@
 
 <body>
   <header>
+    <!-- Cartly logo -->
     <div>
-      <img src="./Assets/Images/ic_logo.jpeg" alt="Cartly_logo">
-      <h2>Cartly</h2>
+      <a href="../index.html">
+        <img
+          src="https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/ic_logo.jpeg?t=2025-01-03T08%3A08%3A04.679Z"
+          alt="Cartly_logo">
+        <h2>Cartly</h2>
+      </a>
     </div>
+
+    <!-- Search bar  -->
     <div class="search-bar">
       <input type="text" placeholder="Search here..." id="search-input">
       <button id="search-button">
         <i class="fa-solid fa-magnifying-glass"></i>
-
       </button>
+
     </div>
 
     <div id="logout">
-      <button class="cart">
+      <!-- Cart -->
+      <button class="cart" id="cart-icon">
         <p><i class="fa-solid fa-cart-shopping"></i></p>
       </button>
+      <!-- Profile -->
       <button id="logout-button">
-
         <p><i class="fa-solid fa-user"></i></p>
-
       </button>
     </div>
-  
+
   </header>
-                                                                                                                                                                            
-
-  <div class="navbar">
-
-    <a href="./Pages/Categories.html">Books</a>
-    <a href="./Pages/Categories.html">Stationery</a>
-    <a href="./Pages/Categories.html">Electronics</a>
-    <a href="./Pages/Categories.html">Sports & Extracurricular Gear</a>
-    <a href="./Pages/Categories.html">Study Essentials</a>
-
-  </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    
+    <a href="./Pages/Categories.html?category=Books" aria-label="View Books">Books</a>
+    <a href="./Pages/Categories.html?category=Stationery" aria-label="View Stationery">Stationery</a>
+    <a href="./Pages/Categories.html?category=Electronics" aria-label="View Electronics">Electronics</a>
+    <a href="./Pages/Categories.html?category=Sports" aria-label="View Sports & Extracurricular Gear">Sports & Extracurricular Gear</a>
+    <a href="./Pages/Categories.html?category=StudyEssentials" aria-label="View Study Essentials">Study Essentials</a>
+  </nav>
+  
 
 
   <div class="wrapper">
+    <!-- Left button for carousel-->
     <i id="left" class="fa-solid fas fa-angle-left"></i>
+
     <ul class="carousel">
+      <!-- Product Cards will get appended here  -->
     </ul>
+
+    <!-- Right button for carousel-->
+
     <i id="right" class="fa-solid fas fa-angle-right"></i>
   </div>
 
