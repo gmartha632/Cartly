@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const autoPlay = () => {
         // Return if window is smaller than 800
-        if (window.innerWidth < 800) return;
+        if (window.innerWidth < 500) return;
 
         // Calculate the total width of all cards
         const totalCardWidth = carousel.scrollWidth;
