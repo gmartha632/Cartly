@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Product to Firebase</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    form {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input, textarea, button {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <h1>Upload Product</h1>
+  <form id="productForm">
+    <label for="name">Product Name:</label>
+    <input type="text" id="name" placeholder="Enter product name" required>
+    
+    <label for="price">Price:</label>
+    <input type="number" id="price" placeholder="Enter price" required>
+    
+    <label for="description">Description:</label>
+    <textarea id="description" rows="4" placeholder="Enter product description" required></textarea>
+    
+    <label for="imageInput">Product Image:</label>
+    <input type="file" id="imageInput" accept="image/*" required>
+    <input type="checkbox" id="isHomePage"  >
+    
+    <button type="submit">Upload Product</button>
+
+    <div id="productsContainer"></div>
+  </form>
+
+  <script type="module">
+    // Import Firebase ES7 modules
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js';
+    import { getDatabase, ref, push, set,get } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js';
+
+    // Firebase Configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCTj8qVmWz9kWq6wxuSCDYE3iljRQZTCFE",
+        authDomain: "cartly-314cd.firebaseapp.com",
+        databaseURL: "https://cartly-314cd-default-rtdb.firebaseio.com",
+        projectId: "cartly-314cd",
+        storageBucket: "cartly-314cd.firebasestorage.app",
+        messagingSenderId: "1075164553188",
+        appId: "1:1075164553188:web:8e9a88d063d1541d8371f1",
+        measurementId: "G-4LPYG75NPM"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Convert image to Base64
+    function encodeImageToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+        reader.readAsDataURL(file);
+    });
+}
+
+
+    // Handle form submission
+    document.getElementById('productForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const price = document.getElementById('price').value;
+      const description = document.getElementById('description').value;
+      const isHomePage = document.getElementById('isHomePage');
+      const fileInput = document.getElementById('imageInput');
+      const file = fileInput.files[0];
+
+      if (file) {
+        try {
+          const imgUrl = await encodeImageToBase64(file);
+
+          // Save product details to Firebase
+          const productRef = push(ref(db, 'products'));
+          await set(productRef, {
+            name,
+            price,
+            description,
+            img_url: imgUrl,
+            isHomePage:isHomePage.checked,
+          });
+
+          alert('Product uploaded successfully!');
+          document.getElementById('productForm').reset();
+        } catch (error) {
+          console.error('Error uploading product:', error);
+          alert('Failed to upload product. Please try again.');
+        }
+      } else {
+        alert('Please select an image.');
+      }
+    });
+
+    const productRef = ref(db, 'products');
+        let snapShot=  await get(productRef);
+        let products=snapShot.val()
+        for (let productID in products){
+            let product=products[productID]
+            //if(product.isHomePage){
+                let div=document.createElement('div')
+                div.innerHTML=`<img src=${product.img_url} id="image" alt="">
+                <p id="productName">${product.name}</p>`
+                document.getElementById('productsContainer').appendChild(div)
+            //}
+
+        }
+
+  </script>
+</body>
+</html>
