@@ -17,8 +17,7 @@
     <!-- Cartly logo -->
     <div>
       <a href="../index.html">
-        <img
-          src="https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/ic_logo.jpeg?t=2025-01-03T08%3A08%3A04.679Z"
+        <img src="https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Dashboard/ic_logo.jpeg"
           alt="Cartly_logo">
         <h2>Cartly</h2>
       </a>
@@ -32,29 +31,34 @@
       </button>
 
     </div>
-
-    <div id="logout">
+    <!-- Suggestions dropdown -->
+    <ul id="suggestions-list" class="suggestions-list"></ul>
+    <div>
       <!-- Cart -->
       <button class="cart" id="cart-icon">
         <p><i class="fa-solid fa-cart-shopping"></i></p>
       </button>
       <!-- Profile -->
-      <button id="logout-button">
+      <button id="profile">
         <p><i class="fa-solid fa-user"></i></p>
+        <div id="profile-dropdown" class="profile-dropdown">
+          <a href="#" id="logout">Log out</a>
+        </div>
       </button>
     </div>
 
   </header>
   <!-- Navbar -->
   <nav class="navbar">
-    
+
     <a href="./Pages/Categories.html?category=Books" aria-label="View Books">Books</a>
     <a href="./Pages/Categories.html?category=Stationery" aria-label="View Stationery">Stationery</a>
     <a href="./Pages/Categories.html?category=Electronics" aria-label="View Electronics">Electronics</a>
-    <a href="./Pages/Categories.html?category=Sports" aria-label="View Sports & Extracurricular Gear">Sports & Extracurricular Gear</a>
+    <a href="./Pages/Categories.html?category=Sports" aria-label="View Sports & Extracurricular Gear">Sports &
+      Extracurricular Gear</a>
     <a href="./Pages/Categories.html?category=StudyEssentials" aria-label="View Study Essentials">Study Essentials</a>
   </nav>
-  
+
 
 
   <div class="wrapper">
@@ -71,7 +75,7 @@
   </div>
 
 
-  <script src="./Assets/Script/Dashbaord.js">
+  <script src="./Assets/Script/Dashboard.js">
 
   </script>
 

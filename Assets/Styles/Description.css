@@ -147,6 +147,9 @@ p i:hover{
   margin: 0 auto;
   max-width: 1200px; /* Adjust max-width to fit your layout */
   gap: 30px; /* Adds space between left and right sections */
+  margin-top:120px ;
+  margin-right:100px ;
+
 }
 
 /* Styling for the product image section */
@@ -211,7 +214,7 @@ p i:hover{
 
 /* Button hover effect */
 .action-buttons button:hover {
-  background-color: #e64a19; /* Darker shade on hover */
+  background-color: lightgreen; /* Darker shade on hover */
 }
 
 

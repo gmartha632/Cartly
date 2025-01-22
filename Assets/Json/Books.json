@@ -1,0 +1,194 @@
+{
+    "Books": {
+        "Computer Science": [
+            {
+                "id": 1,
+                "name": "Clean Code",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Computer%20Science/Clean%20code.jpg",
+                "price": 950,
+                "description": "Clean Code offers practical advice on writing readable, maintainable, and efficient code. It focuses on best practices and methodologies for writing high-quality code in real-world programming."
+            },
+            {
+                "id": 2,
+                "name": "Code Complete",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Computer%20Science/Code%20%20Complete.jpg",
+                "price": 3878,
+                "description": "Code Complete is one of the most comprehensive resources for understanding software construction. It explores essential coding techniques, debugging strategies, and refactoring methods to improve the overall quality of your code."
+            },
+            {
+                "id": 3,
+                "name": "Programming Pearls",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Computer%20Science/Programming%20Pearls.jpg",
+                "price": 1357,
+                "description": "Programming Pearls is a collection of insightful essays on algorithm design and programming practices. It provides problem-solving techniques, code optimization tips, and practical advice on how to approach complex programming challenges."
+            },
+            {
+                "id": 4,
+                "name": "The Mythical Man Month",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Computer%20Science/The%20Mythical%20Man%20-%20Month.jpg",
+                "price": 3465,
+                "description": "The Mythical Man-Month is a classic work on software project management. It delves into the complexities of large-scale software projects, offering timeless insights on managing teams, deadlines, and the often-overlooked human aspects of development."
+            },
+            {
+                "id": 5,
+                "name": "The Pragmatic Programmer",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Computer%20Science/The%20pragmatic%20programmer.jpg",
+                "price": 575,
+                "description": "The Pragmatic Programmer is a must-read for any software developer. It covers a wide range of topics, from practical coding tips to career advice, offering insights into becoming a better programmer and a more effective problem solver."
+            }
+        ],
+        "English": [
+            {
+                "id": 6,
+                "name": "1984",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/English/1984.jpg",
+                "price": 198,
+                "description": "1984 is George Orwell's dystopian novel that explores themes of totalitarianism, surveillance, and individual freedom. It presents a chilling vision of a society controlled by a powerful government and is a critical look at the dangers of unchecked political authority."
+            },
+            {
+                "id": 7,
+                "name": "A Tale of Two Cities",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/English/A%20taleof%20two%20cities.jpg",
+                "price": 235,
+                "description": "A Tale of Two Cities by Charles Dickens is a historical novel set during the French Revolution. It contrasts the experiences of two cities, London and Paris, highlighting themes of sacrifice, redemption, and social justice in a time of political upheaval."
+            },
+            {
+                "id": 8,
+                "name": "Fahrenheit 451",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/English/Fahrenheit%20451.jpg",
+                "price": 380,
+                "description": "Fahrenheit 451 by Ray Bradbury is a dystopian novel that imagines a future where books are banned, and 'firemen' burn any that are found. It explores themes of censorship, conformity, and the power of literature in an increasingly oppressive society."
+            },
+            {
+                "id": 9,
+                "name": "Life of Pi",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/English/Life%20of%20Pie.jpg",
+                "price": 312,
+                "description": "Life of Pi by Yann Martel is a tale of survival, adventure, and spirituality. It follows Pi Patel, a young boy stranded at sea with a Bengal tiger, exploring themes of faith, belief, and the human will to live."
+            },
+            {
+                "id": 10,
+                "name": "To Kill a Mockingbird",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/English/To%20kill%20a%20Mockingbird.jpg",
+                "price": 22,
+                "description": "To Kill a Mockingbird by Harper Lee is a classic novel that explores racial injustice, moral growth, and the loss of innocence in the American South. It follows the story of Scout Finch as her father, Atticus Finch, defends a black man wrongfully accused of raping a white woman."
+            }
+        ],
+        "Physics": [
+            {
+                "id": 11,
+                "name": "Fundamentals of Physics",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Physics/Fundamentals%20of%20Physics.jpg",
+                "price": 3248,
+                "description": "Fundamentals of Physics is an essential textbook for beginners, covering core topics in classical and modern physics. It serves as a comprehensive guide to understanding the fundamental principles that govern the physical universe."
+            },
+            {
+                "id": 12,
+                "name": "Concepts of Physics vol 1",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Physics/Concepts%20of%20Physics%20vol%201.jpg",
+                "price": 499,
+                "description": "Concepts of Physics Vol 1 by H.C. Verma provides an in-depth explanation of basic principles of physics, including mechanics, thermodynamics, and waves. It's widely used by students for both conceptual understanding and problem-solving practice."
+            },
+            {
+                "id": 13,
+                "name": "Conceptual Physics",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Physics/Conceptual%20Physics.jpg",
+                "price": 746,
+                "description": "Conceptual Physics offers an accessible approach to understanding the concepts of physics without heavy reliance on complex mathematics. Ideal for physics students and enthusiasts, it explains classical mechanics and other foundational concepts in a clear and approachable way."
+            },
+            {
+                "id": 14,
+                "name": "Physics Galaxy",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Physics/Physics%20Galaxy.jpg",
+                "price": 524,
+                "description": "Physics Galaxy is a comprehensive guide to quantum mechanics and advanced physics concepts. The book presents complex topics in a simplified manner, making quantum mechanics more intuitive and easier to grasp for students at the undergraduate level."
+            },
+            {
+                "id": 15,
+                "name": "Principles of Physics",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Physics/Principles%20of%20Physics.jpg",
+                "price": 620,
+                "description": "Principles of Physics by David Halliday and Robert Resnick offers a rigorous introduction to the principles of electromagnetism, optics, and other essential areas of physics. This textbook is perfect for those looking to gain a deep understanding of the underlying principles that drive the natural world."
+            }
+        ],
+        "Chemistry": [
+            {
+                "id": 16,
+                "name": "A Textbook of Inorganic Chemistry",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Chemistry/A%20textbook%20of%20Inorganic%20Chemistry.jpg",
+                "price": 726,
+                "description": "This textbook provides a comprehensive overview of inorganic chemistry, covering the structure, bonding, and properties of inorganic compounds. It is designed for undergraduate students and offers clear explanations of complex concepts in the field."
+            },
+            {
+                "id": 17,
+                "name": "Handbook of Chemistry",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Chemistry/Handbook%20of%20Chemistry.webp",
+                "price": 295,
+                "description": "The Handbook of Chemistry is a detailed resource that explores the principles of inorganic chemistry, including atomic structure, chemical bonding, and the periodic table. It is an invaluable reference for students and professionals seeking a deeper understanding of inorganic reactions and applications."
+            },
+            {
+                "id": 18,
+                "name": "Organic Chemistry",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Chemistry/Organic%20Chemistry.jpg",
+                "price": 1080,
+                "description": "Organic Chemistry is a fundamental resource that covers the structure, reactivity, and synthesis of organic molecules. It emphasizes key concepts such as functional groups, reaction mechanisms, and spectroscopy, making it an essential guide for students and professionals in the field."
+            },
+            {
+                "id": 19,
+                "name": "Physical Chemistry",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Chemistry/Physical%20Chemistry.jpg",
+                "price": 969,
+                "description": "Physical Chemistry introduces the key principles of thermodynamics, kinetics, and quantum chemistry. This book provides a strong foundation in the theories that explain the behavior of chemical systems and processes, ideal for students pursuing advanced chemistry studies."
+            },
+            {
+                "id": 20,
+                "name": "Biochemistry for Beginners",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Chemistry/Handbook%20of%20Biochemistry.jpg",
+                "price": 288,
+                "description": "Biochemistry for Beginners is an accessible introduction to the molecular foundation of life processes. This book covers the structure and function of biomolecules such as proteins, nucleic acids, and lipids, providing a clear understanding of how biochemistry applies to biology and medicine."
+            }
+        ],
+        "Maths": [
+            {
+                "id": 21,
+                "name": "Coordinate Geometry",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Maths/Coordinate%20geometry.jpg",
+                "price": 525,
+                "description": "Coordinate Geometry introduces the fundamental concepts of geometry in a coordinate plane. This book explains how to solve problems involving points, lines, and curves using algebraic methods. It's a great resource for students looking to grasp the relationship between algebra and geometry."
+            },
+            {
+                "id": 22,
+                "name": "Linear Algebra Basics",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Maths/Linear%20Algebra%20(1).jpg",
+                "price": 950,
+                "description": "Linear Algebra Basics covers the core principles of linear algebra, including matrices, vectors, and systems of linear equations. With numerous examples and exercises, this book helps readers understand the theory and applications of linear algebra in mathematics and real-world problems."
+            },
+            {
+                "id": 23,
+                "name": "Vedic Maths",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Maths/Vedic%20Maths.webp",
+                "price": 172,
+                "description": "Vedic Maths presents a collection of ancient techniques for solving mathematical problems faster and more efficiently. This book introduces shortcuts for arithmetic operations, algebra, and geometry, making it a useful tool for students and math enthusiasts alike."
+            },
+            {
+                "id": 24,
+                "name": "Probability and Statistics",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Maths/Probability%20and%20Statistics.jpg",
+                "price": 599,
+                "description": "Probability and Statistics provides a foundational understanding of probability theory and statistical methods. This book covers topics such as probability distributions, statistical inference, and hypothesis testing, and is suitable for students in both mathematics and applied fields."
+            },
+            {
+                "id": 25,
+                "name": "Mathematical Thinking",
+                "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Maths/Mathematical%20Thinking.jpg",
+                "price": 615,
+                "description": "Mathematical Thinking introduces logical reasoning and the art of mathematical proof. The book emphasizes how to think like a mathematician, presenting strategies for constructing valid arguments, solving problems, and exploring abstract mathematical concepts."
+            }
+        ]
+    }
+
+    
+       
+      
+    
+}

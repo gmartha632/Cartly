@@ -1,26 +1,29 @@
-let logout = document.getElementById("logout-button")
-// logout function
-logout.addEventListener("click", () => {
-  window.location.href = "../../Pages/Login.html"
+// Profile logout option
+const logoutButton = document.getElementById('logout');
+logoutButton.addEventListener('click', () => {
+  window.location.href = '../../Pages/Login.html';  
 });
 
 // Cart navigation
-let cart = document.getElementById('cart-icon') ;
+let cart = document.getElementById('cart-icon');
 cart.addEventListener('click', () => {
-  window.location.href = '../../Pages/Cart.html'; 
+  window.location.href = '../../Pages/Cart.html';
 });
 
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/sign/Product-JSON/Products.json?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJQcm9kdWN0LUpTT04vUHJvZHVjdHMuanNvbiIsImlhdCI6MTczNjEwNzA0OCwiZXhwIjoyMDUxNDY3MDQ4fQ.LAbnKkRpdODXT5x8bRY0YdZaayFwSgCCw4ngsMdIPa8') .then(response => response.json())  // Parse the JSON response
+  fetch('https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Product-JSON/Products.json')  
+  .then(response => response.json())  // Parse the JSON response
     .then(data => {
       const products = data.products; // Access the products array
       const carousel = document.querySelector('.carousel');
       const arrowBtns = document.querySelectorAll('.wrapper i');
       const wrapper = document.querySelector('.wrapper');
-       console.log(products)
-      // Append products to the carousel
+      const searchInput = document.getElementById('search-input');
+      const suggestionsList = document.getElementById('suggestions-list');
+
+      // Append products to the
       products.forEach(product => {
         const productElement = document.createElement('li');
         productElement.classList.add('card');
@@ -33,20 +36,69 @@ document.addEventListener('DOMContentLoaded', () => {
           <span>${product.price}</span> `
 
           ;
-       carousel.appendChild(productElement);
-       console.log(productElement.dataset.id)
-       productElement.addEventListener('click', function () {
-        const productId = productElement.dataset.id;  // Get the unique product ID
-        if (productId) {
-          // Navigate to Description.html, passing the product ID as a query parameter
-          window.location.href = ` ../../Pages/Description.html?id=${encodeURIComponent(productId)}`;
+        carousel.appendChild(productElement);
+        // console.log(productElement.dataset.id)
+        productElement.addEventListener('click', function () {
+          const productId = productElement.dataset.id;  // Get the unique product ID
+          if (productId) {
+            // Navigate to Description.html, passing the product ID as a query parameter
+            window.location.href = ` ../../Pages/Description.html?id=${encodeURIComponent(productId)}`;
+          } else {
+            console.error('Product ID is missing!');
+          }
+        });
+      });
+
+
+
+      // Function to filter products by search term
+      const filterProducts = (searchTerm) => {
+        const lowerCaseSearchTerm = searchTerm.toLowerCase();
+        return products.filter(product =>
+          product.name.toLowerCase().includes(lowerCaseSearchTerm)
+        );
+      };
+
+      // Function to display the suggestions
+      const displaySuggestions = (suggestions) => {
+        suggestionsList.innerHTML = ''; // Clear previous suggestions
+        suggestions.forEach(product => {
+          const suggestionItem = document.createElement('li');
+          suggestionItem.textContent = product.name;
+          suggestionItem.addEventListener('click', () => {
+            window.location.href = `../../Pages/Description.html?id=${encodeURIComponent(product.name)}`;
+          });
+          suggestionsList.appendChild(suggestionItem);
+        });
+      };
+
+      // Event listener for search input
+      searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value;
+        if (searchTerm) {
+          const filteredProducts = filterProducts(searchTerm);
+          displaySuggestions(filteredProducts);
         } else {
-          console.error('Product ID is missing!');
+          suggestionsList.innerHTML = ''; // Clear suggestions when search is empty
         }
       });
 
-      
+
+      const searchButton = document.getElementById('search-button');
+
+      // When the input is focused, hide the search button
+      searchInput.addEventListener('focus', () => {
+        searchButton.classList.add('hide');
       });
+
+      // When the input is blurred (focus is lost), show the search button again
+      searchInput.addEventListener('blur', () => {
+        searchButton.classList.remove('hide');
+      });
+
+
+
+
 
       // Recalculate firstCardWidth after appending products
       const firstCard = carousel.querySelector('.card');
@@ -125,4 +177,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
+
 

@@ -77,13 +77,48 @@ header img {
 
 
 
-#logout-button {
+#profile {
     background: none;
     border: none;
     padding: 0;
     margin: 0;
     cursor: pointer;
     display: inline-block;
+    width: 50px;
+}
+
+/* Profile dropdown menu */
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: 40px;
+    /* Adjust the position of the dropdown */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100000;
+}
+
+.profile-dropdown a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.profile-dropdown a:hover {
+    background-color: var(--background-color);
+    /* Change to your desired hover color */
+    color: white;
+}
+
+/* Show dropdown on hover */
+#profile:hover .profile-dropdown {
+    display: block;
 }
 .cart{
     background: none;
@@ -144,11 +179,11 @@ p i:hover{
 #sidebar {
     background-color: white;
     padding: 20px;
-    /* border: 1px solid #ccc; */
+    border: 1px solid #ccc;
     width: 250px;
     position: fixed; /* Keeps it fixed on the page */
-    top: 80px; /* Adjust this based on the height of your header */
-    left: 20px;
+    top: 110px; /* Adjust this based on the height of your header */
+    left: 0px;
     bottom: 0; /* Stretches the sidebar to the bottom */
     max-height: calc(100vh - 80px); /* Ensure it doesn't overflow the screen */
     overflow-y: auto; /* Enables scrolling for sidebar content */
@@ -200,13 +235,7 @@ p i:hover{
     color: #333;
 }
 
-/* Subcategory Hover Effect */
-.subcategories li:hover {
-    background-color: #f0f0f0;
-    border-radius: 4px;
-    cursor: pointer;
-    padding: 5px 0;
-}
+
 
 /* Checkbox styling */
 .subcategory-checkbox {
@@ -219,12 +248,7 @@ p i:hover{
     transform: scale(1.2);
 }
 
-/* Hover effect on Sort by Price Section */
-.sort-price:hover {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 20px;
-}
+
 
 
 
