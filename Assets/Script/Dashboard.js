@@ -1,181 +1,79 @@
-// Profile logout option
-const logoutButton = document.getElementById('logout');
-logoutButton.addEventListener('click', () => {
-  window.location.href = '../../Pages/Login.html';  
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import {
+  getAuth,
+  signOut,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCTj8qVmWz9kWq6wxuSCDYE3iljRQZTCFE",
+  authDomain: "cartly-314cd.firebaseapp.com",
+  projectId: "cartly-314cd",
+  storageBucket: "cartly-314cd.firebasestorage.app",
+  messagingSenderId: "1075164553188",
+  appId: "1:1075164553188:web:8e9a88d063d1541d8371f1",
+  measurementId: "G-4LPYG75NPM",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const database = getDatabase(app);
+
+
+let isLoggedIn = localStorage.getItem("isLoggedIn");
+
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    isLoggedIn = true;
+    localStorage.setItem("isLoggedIn", true);
+    localStorage.setItem("userId", user.uid);
+
+  }
 });
 
-// Cart navigation
-let cart = document.getElementById('cart-icon');
-cart.addEventListener('click', () => {
-  window.location.href = '../../Pages/Cart.html';
-});
+const fetchData = async () => {
+  const dbRef = ref(database, "dashboard"); 
+  try {
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      const data = snapshot.val(); 
+      displayData(data);
+    } else {
+      console.log("No data available");
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
 
+const displayData = (data) => {
+  const dashboard = document.getElementById("dashboard");
+  dashboard.innerHTML = "";
 
-
-document.addEventListener('DOMContentLoaded', () => {
-  fetch('https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Product-JSON/Products.json')  
-  .then(response => response.json())  // Parse the JSON response
-    .then(data => {
-      const products = data.products; // Access the products array
-      const carousel = document.querySelector('.carousel');
-      const arrowBtns = document.querySelectorAll('.wrapper i');
-      const wrapper = document.querySelector('.wrapper');
-      const searchInput = document.getElementById('search-input');
-      const suggestionsList = document.getElementById('suggestions-list');
-
-      // Append products to the
-      products.forEach(product => {
-        const productElement = document.createElement('li');
-        productElement.classList.add('card');
-        productElement.setAttribute('data-id', product.name);
-
-        productElement.innerHTML = `    <div class="img">
-            <img src="${product.image}" alt="${product.name}" draggable="false">
-          </div>
-          <h2>${product.name}</h2>
-          <span>${product.price}</span> `
-
-          ;
-        carousel.appendChild(productElement);
-        // console.log(productElement.dataset.id)
-        productElement.addEventListener('click', function () {
-          const productId = productElement.dataset.id;  // Get the unique product ID
-          if (productId) {
-            // Navigate to Description.html, passing the product ID as a query parameter
-            window.location.href = ` ../../Pages/Description.html?id=${encodeURIComponent(productId)}`;
-          } else {
-            console.error('Product ID is missing!');
-          }
-        });
-      });
-
-
-
-      // Function to filter products by search term
-      const filterProducts = (searchTerm) => {
-        const lowerCaseSearchTerm = searchTerm.toLowerCase();
-        return products.filter(product =>
-          product.name.toLowerCase().includes(lowerCaseSearchTerm)
-        );
-      };
-
-      // Function to display the suggestions
-      const displaySuggestions = (suggestions) => {
-        suggestionsList.innerHTML = ''; // Clear previous suggestions
-        suggestions.forEach(product => {
-          const suggestionItem = document.createElement('li');
-          suggestionItem.textContent = product.name;
-          suggestionItem.addEventListener('click', () => {
-            window.location.href = `../../Pages/Description.html?id=${encodeURIComponent(product.name)}`;
-          });
-          suggestionsList.appendChild(suggestionItem);
-        });
-      };
-
-      // Event listener for search input
-      searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value;
-        if (searchTerm) {
-          const filteredProducts = filterProducts(searchTerm);
-          displaySuggestions(filteredProducts);
-        } else {
-          suggestionsList.innerHTML = ''; // Clear suggestions when search is empty
-        }
-      });
-
-
-      const searchButton = document.getElementById('search-button');
-
-      // When the input is focused, hide the search button
-      searchInput.addEventListener('focus', () => {
-        searchButton.classList.add('hide');
-      });
-
-      // When the input is blurred (focus is lost), show the search button again
-      searchInput.addEventListener('blur', () => {
-        searchButton.classList.remove('hide');
-      });
-
-
-
-
-
-      // Recalculate firstCardWidth after appending products
-      const firstCard = carousel.querySelector('.card');
-      const firstCardWidth = firstCard.offsetWidth;
-
-      let isDragging = false,
-        startX,
-        startScrollLeft,
-        timeoutId;
-
-      // Dragging logic
-      const dragStart = (e) => {
-        isDragging = true;
-        carousel.classList.add('dragging');
-        startX = e.pageX;
-        startScrollLeft = carousel.scrollLeft;
-      };
-
-      const dragging = (e) => {
-        if (!isDragging) return;
-
-        // Calculate the new scroll position
-        const newScrollLeft = startScrollLeft - (e.pageX - startX);
-
-        // Check if the new scroll position exceeds the carousel boundaries
-        if (newScrollLeft <= 0 || newScrollLeft >= carousel.scrollWidth - carousel.offsetWidth) {
-          // If so, prevent further dragging
-          isDragging = false;
-          return;
-        }
-
-        // Otherwise, update the scroll position of the carousel
-        carousel.scrollLeft = newScrollLeft;
-      };
-
-      const dragStop = () => {
-        isDragging = false;
-        carousel.classList.remove('dragging');
-      };
-
-      const autoPlay = () => {
-        // Return if window is smaller than 800
-        if (window.innerWidth < 800) return;
-
-        // Calculate the total width of all cards
-        const totalCardWidth = carousel.scrollWidth;
-
-        // Calculate the maximum scroll position
-        const maxScrollLeft = totalCardWidth - carousel.offsetWidth;
-
-        // If the carousel is at the end, stop autoplay
-        if (carousel.scrollLeft >= maxScrollLeft) return;
-
-        // Autoplay the carousel after every 2500ms
-        timeoutId = setTimeout(() =>
-          carousel.scrollLeft += firstCardWidth, 2500);
-      };
-
-      // Event listeners for dragging
-      carousel.addEventListener('mousedown', dragStart);
-      carousel.addEventListener('mousemove', dragging);
-      document.addEventListener('mouseup', dragStop);
-      wrapper.addEventListener('mouseenter', () => clearTimeout(timeoutId));
-      wrapper.addEventListener('mouseleave', autoPlay);
-
-      // Event listeners for the arrow buttons
-      arrowBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          carousel.scrollLeft += btn.id === 'left' ? -firstCardWidth : firstCardWidth;
-        });
-      });
+  data.forEach(item => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    
+    card.innerHTML = `
+      <img src="${item.image}" alt="${item.name}">
+      <div class="card-content">
+        <h3>${item.name}</h3>
+        <p>${item.description}</p>
+      </div>
+    `;
+    
+    dashboard.appendChild(card);
+    card.addEventListener("click",()=>{
+      localStorage.setItem("selectedCategory",item.name)
+      window.location.href="../../Pages/Categories.html"
     })
-    .catch(error => console.error('Error fetching the JSON:', error));
+  });
+};
 
-
-
-
-});
+document.addEventListener("DOMContentLoaded", fetchData);
 
 

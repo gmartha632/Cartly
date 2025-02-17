@@ -39,35 +39,30 @@
         <!-- Cart -->
         <button class="cart" id="cart-icon">
           <p><i class="fa-solid fa-cart-shopping"></i></p>
-        </button>
+          <span id="cart-count">0</span> <!-- Cart count badge -->
+      </button>
         <!-- Profile -->
         <button id="profile">
           <p><i class="fa-solid fa-user"></i></p>
           <div id="profile-dropdown" class="profile-dropdown">
-            <a href="#" id="logout">Log out</a>
+            <p  id="logout"></p>
           </div>
         </button>
       </div>
-
   </header>
 
-  <!-- Navbar -->
-  <div class="navbar">
-    <a href="#" data-category="Books">Books</a>
-    <a href="#" data-category="Stationery">Stationery</a>
-    <a href="#" data-category="Electronics">Electronics</a>
-    <a href="#" data-category="Sports">Sports & Extracurricular Gear</a>
-    <a href="#" data-category="Study Essentials">Study Essentials</a>
+
+  <div id="sidebar">
+    
   </div>
 
-  <!-- Sidebar -->
- 
-    <div id="sidebar"></div>
-  <!--Product display  -->
-  <div id="products-container"></div>
+  <div id="mainContainer">
+    <h2 id="categoryName"></h2>
+    <div id="productsContainer"></div>
+  </div>
 
-
-  <script src="../Assets/Script/Categories.js">
+  <script src="../Assets/Script/navFunctionality.js" type="module"></script>
+  <script src="../Assets/Script/Categories.js" type="module">
 
   </script>
 

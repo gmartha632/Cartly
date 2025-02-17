@@ -13,11 +13,11 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--fonts);
     background-color: #f9f9f9;
 }
 
-/* Search Navigation */
+
 header h2{
     font-family: var(--fonts);
 }
@@ -37,7 +37,6 @@ header div a {
     color: inherit;  
     text-decoration: none;
 }
-
 
 header>div:last-child {
     display: flex;
@@ -76,22 +75,75 @@ header img {
     align-items: center;
 }
 
-#logout-button {
+
+
+#profile {
     background: none;
     border: none;
     padding: 0;
     margin: 0;
     cursor: pointer;
     display: inline-block;
+    width: 50px;
 }
-.cart{
+
+/* Profile dropdown menu */
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: 40px;
+    /* Adjust the position of the dropdown */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100000;
+}
+
+.profile-dropdown p {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.profile-dropdown p:hover {
+    background-color: var(--background-color);
+    /* Change to your desired hover color */
+    color: white;
+}
+
+/* Show dropdown on hover */
+#profile:hover .profile-dropdown {
+    display: block;
+}
+#cart-icon {
+    position: relative;
     background: none;
     border: none;
-    padding: 0;
-    margin: 0;
     cursor: pointer;
-    display: inline-block;
-}
+    font-size: 18px;
+  }
+  
+  #cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
 
 p i{
     font-size: 20px;
@@ -102,6 +154,7 @@ p i:hover{
     color: var(--background-color);
     transform: scale(.9);
 }
+
 /* Navbar */
 
 .navbar {
@@ -137,79 +190,325 @@ p i:hover{
 }
 
 
-/* Cart item */
 
-/* Layout for the cart item */
+/* Sidebar Container */
+#sidebar {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    height: 100vh;
+    top: 8vh;
+    width: 250px;
+    position: fixed; /* Keeps it fixed on the page */
+    left: 0px;
+    bottom: 0; 
+    overflow-y: auto; /* Enables scrolling for sidebar content */
+    border-radius: 8px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Sort by Price Section */
+.sort-price {
+    margin-bottom: 20px;
+}
+
+.sort-price h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.sort-price input {
+    margin-right: 8px;
+}
+
+/* Subcategories Section */
+.subcategories {
+    margin-top: 20px;
+}
+
+.subcategories h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.subcategories ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.subcategories li {
+    margin-bottom: 10px;
+}
+
+.subcategories input {
+    margin-right: 8px;
+}
+
+.subcategories li label {
+    font-size: 16px;
+    color: #333;
+}
+
+
+
+/* Checkbox styling */
+.subcategory-checkbox {
+    transform: scale(1.2);
+    margin-right: 10px;
+}
+
+/* Sort by Price Checkbox Styling */
+.price-checkbox {
+    transform: scale(1.2);
+}
+
+
+
+#mainContainer{
+    position: fixed;
+    top: 10vh;
+    left: 18vw;
+    width: 80%;
+    height:85%;
+}
+
+
+.cart-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin: auto;
+}
+
+h1 {
+    color: #007bff;
+}
+
 .cart-item {
     display: flex;
-    align-items: center; /* Align items horizontally */
-    justify-content: space-between; /* Distribute space between items */
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  /* Image styling */
-  .cart-item img {
-    width: 100px;
-    height: 100px;
-    margin-right: 20px; /* Space between image and description */
-  }
-  
-  /* Container for the product details */
-  .cart-item-details {
-    display: flex;
-    flex-direction: column; /* Stack text elements vertically */
-    justify-content: flex-start;
-    flex-grow: 1;
-    margin-right: 20px; /* Space between details and quantity */
-  }
-  
-  .cart-item-description {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 5px; /* Space between description and quantity */
-  }
-  
-  /* Quantity and buttons container */
-  .cart-item-quantity {
-    display: flex;
+    justify-content: space-between;
     align-items: center;
-  }
-  
-  .cart-item-quantity button {
-    padding: 5px;
-    margin: 0 10px;
-    background-color: #ddd;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.cart-buttons {
+    margin-top: 20px;
+}
+
+#mainContainer button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
     border: none;
     cursor: pointer;
-    border-radius: 3px;
-  }
-  
-  .cart-item-quantity input {
-    width: 40px;
-    text-align: center;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.remove-btn {
+    background-color: #dc3545;
+}
+
+.remove-btn:hover {
+    background-color: #b02a37;
+}
+
+
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 2rem;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000000;
+}
+
+header div a {
+    display: flex;
+    color: inherit;  
+    text-decoration: none;
+}
+
+header>div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+header img {
+    height: 40px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 5px 10px;
+    width: 650px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    flex: 1 ;
+    font-size: 16px;
     padding: 5px;
+    font-family: var(--fonts);
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+#profile {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: inline-block;
+    width: 50px;
+}
+
+/* Profile dropdown menu */
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: 40px;
+    /* Adjust the position of the dropdown */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100000;
+}
+
+.profile-dropdown p {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.profile-dropdown p:hover {
+    background-color: var(--background-color);
+    /* Change to your desired hover color */
+    color: white;
+}
+
+/* Show dropdown on hover */
+#profile:hover .profile-dropdown {
+    display: block;
+}
+#cart-icon {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
   }
   
-  /* Remove button */
-  .remove-item {
-    background-color: red;
+  #cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+
+p i{
+    font-size: 20px;
+    transition: all 300ms ease;
+
+}
+p i:hover{
+    color: var(--background-color);
+    transform: scale(.9);
+}
+
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.increase-btn, .decrease-btn {
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.increase-btn {
+    background-color: green !important;
+    color: white;
+}
+
+.decrease-btn {
+    background-color: red !important;
+    color: white;
+}
+.increase-btn:hover {
+    background-color: rgb(2, 94, 2) !important;
+    color: white;
+}
+
+.decrease-btn:hover {
+    background-color: rgb(152, 4, 4) !important;
+    color: white;
+}
+
+.remove-btn {
+    background-color: black;
     color: white;
     padding: 5px 10px;
+    border: none;
     cursor: pointer;
-    border-radius: 3px;
-    margin-left: 20px; /* Space between remove button and other elements */
-    width: 100px;
-  }
-  
-  /* Price styling */
-  .cart-item-price {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    margin-left: 20px; /* Space between price and other elements */
-  }
-  
+    border-radius: 5px;
+}

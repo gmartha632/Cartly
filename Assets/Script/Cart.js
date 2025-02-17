@@ -1,113 +1,192 @@
-let logout = document.getElementById("logout-button")
-// logout function
-logout.addEventListener("click", () => {
-  window.location.href = "../../Pages/Login.html"
-});
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import {
+  getDatabase,
+  ref,
+  get,
+  set,
+  remove,
+} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
- // cart
-let cart = document.getElementById('cart-icon') ;
-cart.addEventListener('click', () => {
-  window.location.href = '../../Pages/Cart.html'; // Navigate to the cart page
-});
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCTj8qVmWz9kWq6wxuSCDYE3iljRQZTCFE",
+  authDomain: "cartly-314cd.firebaseapp.com",
+  projectId: "cartly-314cd",
+  storageBucket: "cartly-314cd.firebasestorage.app",
+  messagingSenderId: "1075164553188",
+  appId: "1:1075164553188:web:8e9a88d063d1541d8371f1",
+  measurementId: "G-4LPYG75NPM",
+};
 
-let checkout = document.getElementById('checkout-button')
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+let userId = localStorage.getItem("userId");
 
-checkout.addEventListener("click" , ()=>{
-    window.location.href = '../../Pages/Checkout.html'
-})
+let cart = [];
 
+const fetchAllCartItems = async () => {
+  try {
+    const cartRef = ref(database, `cart/${userId}`);
+    const snapshot = await get(cartRef);
 
+    if (snapshot.exists()) {
+      let cartItems = snapshot.val();
+      cart = []; //  Update global cart array
 
+      // Collect all fetch promises
+      let fetchPromises = Object.keys(cartItems).map(async (cartItem) => {
+        try {
+          const dbRef = ref(
+            database,
+            `Products/${cartItem.split("_").join("/")}`
+          );
+          const cartCountRef = ref(database, `cart/${userId}/${cartItem}`);
 
-document.addEventListener('DOMContentLoaded', () => {
-    const cartItemsContainer = document.getElementById('cart-items');
-    const totalPriceElement = document.getElementById('total-price');
-    const checkoutButton = document.getElementById('checkout-button');
-    
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-    // Function to render cart items
-    function renderCart() {
-        cartItemsContainer.innerHTML = '';
-        let totalPrice = 0;
-  
-        cart.forEach((item, index) => {
-            const itemRow = document.createElement('div');
-            itemRow.classList.add('cart-item');
-            
-            itemRow.innerHTML = `
-                <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-                <div class="cart-item-details">
-                    <h3>${item.name}</h3>
-                    <p>${item.description}</p>
-                    <p>Rs. ${item.price}</p>
-                    <div class="cart-item-quantity">
-                        <button class="decrease-quantity">-</button>
-                        <span class="quantity">${item.quantity}</span>
-                        <button class="increase-quantity">+</button>
-                    </div>
-                    <button class="remove-item">Remove</button>
-                </div>
-                <div class="cart-item-price">Rs. ${item.price * item.quantity}</div>
-            `;
-            
-            // Handle quantity increase and decrease
-            const decreaseButton = itemRow.querySelector('.decrease-quantity');
-            const increaseButton = itemRow.querySelector('.increase-quantity');
-            const removeButton = itemRow.querySelector('.remove-item');
-            // const quantityDisplay = itemRow.querySelector('.quantity');
-            // const priceDisplay = itemRow.querySelector('.cart-item-price');
-            
-            // Decrease quantity
-            decreaseButton.addEventListener('click', () => {
-                updateQuantity(index, -1);
-            });
-            
-            // Increase quantity
-            increaseButton.addEventListener('click', () => {
-                updateQuantity(index, 1);
-            });
-            
-            // Remove item
-            removeButton.addEventListener('click', () => {
-                removeItem(index);
-            });
-            
-            cartItemsContainer.appendChild(itemRow);
-  
-            // Update total price for the cart
-            totalPrice += item.price * item.quantity;
-        });
-  
-        // Update total price display
-        totalPriceElement.textContent = totalPrice.toFixed(2);
-    }
-  
-    // Function to update quantity
-    function updateQuantity(index, change) {
-        const item = cart[index];
-        
-        if (item.quantity + change > 0) {
-            item.quantity += change;
-            localStorage.setItem('cart', JSON.stringify(cart));
-            renderCart();
+          console.log(`Fetching: Products/${cartItem.split("_").join("/")}`);
+          const snapshot = await get(dbRef);
+          const countSnapshot = await get(cartCountRef);
+
+          if (snapshot.exists()) {
+            let data = snapshot.val();
+            let count = countSnapshot.val();
+            cart.push({ ...data, count: count, path: cartItem }); //  Push data to the global cart array
+          } else {
+            console.log("No data available for:", cartItem);
+          }
+        } catch (error) {
+          console.error("Error fetching item:", cartItem, error);
         }
+      });
+
+      // Wait for all fetch requests to complete
+      await Promise.all(fetchPromises);
+
+      console.log("Final Cart:", cart); //  Should now reflect the correct cart
+    } else {
+      console.log("No data available in cart.");
+      cart = [];
     }
-  
-    // Function to remove item from cart
-    function removeItem(index) {
-        cart.splice(index, 1);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        renderCart();
+  } catch (error) {
+    console.error("Error fetching cart data:", error);
+  }
+};
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await fetchAllCartItems();
+
+  const checkoutButton = document.getElementById("checkout");
+  const continueShoppingButton = document.getElementById("continueShopping");
+
+  updateCartUI();
+
+  checkoutButton.addEventListener("click", () => {
+    if (cart.length > 0) {
+      localStorage.setItem("orderSummary", JSON.stringify({ items: cart }));
+      localStorage.removeItem("cart");
+      localStorage.setItem("isFromCartPage", true);
+      window.location.href = "./Checkout.html";
+    } else {
+      alert("Your cart is empty!");
     }
-  
-    // Initialize cart display
-    renderCart();
-    
-    // Handle checkout (for now, just an alert)
-    checkoutButton.addEventListener('click', () => {
-        alert('Proceeding to checkout...');
+  });
+
+  continueShoppingButton.addEventListener("click", () => {
+    window.location.href = "../index.html";
+  });
+});
+
+async function removeFromFireBase(path) {
+  const itemRef = ref(database, `cart/${userId}/${path}`);
+  await remove(itemRef);
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const cartItemsContainer = document.getElementById("cartItems");
+  const totalPriceElement = document.getElementById("totalPrice");
+
+  cartItemsContainer.innerHTML = "";
+  let totalPrice = 0;
+
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+    totalPriceElement.textContent = "0";
+    return;
+  }
+
+  cart.forEach((item, index) => {
+    const itemDiv = document.createElement("div");
+    itemDiv.classList.add("cart-item");
+    itemDiv.innerHTML = `
+    <img src="${item.image}" alt="${item.name}">
+    <p>${item.name} - ₹${item.price}</p>
+    <div class="quantity-controls">
+        <button class="decrease-btn" data-index="${item.path}">−</button>
+        <span class="item-count">${item.count}</span>
+        <button class="increase-btn" data-index="${item.path}">+</button>
+    </div>
+    <button class="remove-btn" data-index="${item.path}">Remove</button>
+`;
+    cartItemsContainer.appendChild(itemDiv);
+    totalPrice += item.count * item.price;
+  });
+
+  totalPriceElement.textContent = totalPrice;
+
+  document.querySelectorAll(".increase-btn").forEach((button) => {
+
+    button.addEventListener("click", async (e) => {
+        const itemPath = e.target.getAttribute("data-index");
+        await updateItemCount(itemPath, 1);
     });
 });
 
-  
+document.querySelectorAll(".decrease-btn").forEach((button) => {
+
+    button.addEventListener("click", async (e) => {
+        const itemPath = e.target.getAttribute("data-index");
+        await updateItemCount(itemPath, -1);
+    });
+});
+
+
+
+  document.querySelectorAll(".remove-btn").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const data = e.target.getAttribute("data-index");
+      cart.splice(data.slice(-1), 1);
+      let path = data.slice(0, -1);
+      removeFromFireBase(path);
+    });
+  });
+}
+
+
+async function updateItemCount(itemPath, change) {
+    // Find the item in cart
+    let item = cart.find((cartItem) => cartItem.path === itemPath);
+
+    if (item) {
+        item.count += change;
+
+        // Remove item if count is 0
+        if (item.count <= 0) {
+            cart = cart.filter((cartItem) => cartItem.path !== itemPath);
+            await removeFromFireBase(itemPath);
+            let cartCount=localStorage.getItem("cartCount")
+            localStorage.setItem("cartCount",cartCount-1)
+            document.getElementById("cart-count").textContent =count-1;
+
+        }
+
+        // Immediately update UI
+        updateCartUI();
+
+        // Sync change with Firebase (but UI updates instantly)
+        const itemRef = ref(database, `cart/${userId}/${itemPath}`);
+        if (item.count > 0) {
+            await set(itemRef, item.count);
+        }
+    }
+}
