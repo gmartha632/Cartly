@@ -17,9 +17,8 @@
     <!-- Cartly logo -->
     <div>
       <a href="../index.html">
-        <img
-          src="https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/ic_logo.jpeg?t=2025-01-03T08%3A08%3A04.679Z"
-          alt="Cartly_logo">
+        <img src="https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Dashboard/ic_logo.jpeg"
+          alt=" Cartly_logo">
         <h2>Cartly</h2>
       </a>
     </div>
@@ -32,33 +31,38 @@
       </button>
 
     </div>
+    <!-- Suggestions dropdown -->
+    <ul id="suggestions-list" class="suggestions-list"></ul>
 
-    <div id="logout">
-      <!-- Cart -->
-      <button class="cart" id="cart-icon">
-        <p><i class="fa-solid fa-cart-shopping"></i></p>
+    <div>
+      <div>
+        <!-- Cart -->
+        <button class="cart" id="cart-icon">
+          <p><i class="fa-solid fa-cart-shopping"></i></p>
+          <span id="cart-count">0</span> <!-- Cart count badge -->
       </button>
-      <!-- Profile -->
-      <button id="logout-button">
-        <p><i class="fa-solid fa-user"></i></p>
-      </button>
-    </div>
-
+        <!-- Profile -->
+        <button id="profile">
+          <p><i class="fa-solid fa-user"></i></p>
+          <div id="profile-dropdown" class="profile-dropdown">
+            <p  id="logout"></p>
+          </div>
+        </button>
+      </div>
   </header>
 
-  <!-- Navbar -->
-  <div class="navbar">
-    <a href="#" data-category="Books">Books</a>
-    <a href="#" data-category="Stationery">Stationery</a>
-    <a href="#" data-category="Electronics">Electronics</a>
-    <a href="#" data-category="Sports">Sports & Extracurricular Gear</a>
-    <a href="#" data-category="Study Essentials">Study Essentials</a>
+
+  <div id="sidebar">
+    
   </div>
 
+  <div id="mainContainer">
+    <h2 id="categoryName"></h2>
+    <div id="productsContainer"></div>
+  </div>
 
-  <div id="sidebar"></div>
-
-  <script src="../Assets/Script/Categories.js">
+  <script src="../Assets/Script/navFunctionality.js" type="module"></script>
+  <script src="../Assets/Script/Categories.js" type="module">
 
   </script>
 

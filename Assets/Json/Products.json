@@ -3,35 +3,35 @@
     {
       "id": "1",
       "name": "Python Book",
-      "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Computerbook.png",
+      "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Dashboard/Computerbook.png",
       "price": "Rs.645",
       "description": "A comprehensive guide to learning Python programming, suitable for both beginners and experienced developers. Covers basic concepts to advanced techniques."
     },
     {
       "id": "2",
       "name": "Hero Pen",
-      "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Hero%20Pen.jpg",
+      "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Dashboard/Hero%20Pen.jpg",
       "price": "Rs.100",
       "description": "A high-quality ballpoint pen known for its smooth writing experience and durable design. Ideal for everyday use, perfect for students and professionals."
     },
     {
       "id": "3",
       "name": "Hp IntelCore 5",
-      "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Laptop.png?t=2025-01-03T08%3A04%3A50.346Z",
+      "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Dashboard/Laptop.png",
       "price": "Rs.49000",
       "description": "A powerful HP laptop with an Intel Core i5 processor, 8GB RAM, and 512GB SSD storage. Perfect for work, study, and entertainment, with long battery life and fast performance."
     },
     {
       "id": "4",
       "name": "Nivia Dominator",
-      "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Football.png",
+      "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Dashboard/Football.png",
       "price": "Rs.1439",
       "description": "Nivia Dominator Football, made with durable material and designed for optimal control and precision during play. Ideal for both recreational and professional use."
     },
     {
       "id": "5",
       "name": "Table",
-      "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Table.png?t=2025-01-03T07%3A50%3A21.456Z",
+      "image": "https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Dashboard/Table.png",
       "price": "Rs.3000",
       "description": "A sturdy and stylish table suitable for home and office use. Made with high-quality wood, this table is designed for durability and functionality. A perfect addition to any room."
     }
