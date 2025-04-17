@@ -1,5 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import { getDatabase, ref, get ,set } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -12,13 +12,22 @@ const firebaseConfig = {
   measurementId: "G-4LPYG75NPM",
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 const database = getDatabase(app);
 
+
+// Data 
 let fullData;
 let selectedCategory = localStorage.getItem("selectedCategory");
 document.getElementById("categoryName").textContent = selectedCategory;
+
+// Initialize cart count
+document.addEventListener("DOMContentLoaded", () => {
+    const cartCount = localStorage.getItem("cartCount") || 0;
+    document.getElementById("cart-count").textContent = cartCount;
+    fetchData();
+  });
 
 const fetchData = async () => {
     const dbRef = ref(database, `Products/${selectedCategory}`); 
@@ -28,9 +37,15 @@ const fetchData = async () => {
             fullData = snapshot.val(); 
             let subCategories = Object.keys(fullData);
             displaySideBar(subCategories);
-            subCategories.forEach(subCategory => {
-                displayData(fullData[subCategory], subCategory,false);
-            });
+
+            // Display all products initially
+      let allProducts = [];
+      subCategories.forEach(subCategory => {
+        allProducts = allProducts.concat(fullData[subCategory]);
+      });
+
+      displayData(allProducts, "All");
+            
         } else {
             console.log("No data available");
         }
@@ -39,152 +54,298 @@ const fetchData = async () => {
     }
 };
 
-const displayData = (data,subCategory, isNew) => {
+// Display products
+const displayData = (products, subCategory) => {
     const productsContainer = document.getElementById("productsContainer");
-    if (isNew) {
-        productsContainer.innerHTML = "";
+    productsContainer.innerHTML = "";
+    
+    if (products.length === 0) {
+      productsContainer.innerHTML = "<p>No products found in this category.</p>";
+      return;
     }
-    data.forEach((item,index) => {
-        const card = document.createElement("div"); 
-        card.classList.add("card");
-        card.innerHTML = `
-            <img src="${item.image}" alt="${item.name}">
-            <div class="card-content">
-                <h3>${item.name}</h3>
-                <p class="price">₹${item.price}</p>
-            </div>
-        `;
-        productsContainer.appendChild(card);
+    
+    products.forEach((product, index) => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <div class="card-content">
+          <h3>${product.name}</h3>
+          <p class="price">₹${product.price}</p>
+        </div>
+      `;
+      
+      card.addEventListener("click", () => {
+        showProductDetail(product, subCategory, index);
+      });
+      
+      productsContainer.appendChild(card);
+    });
+  };
 
-        card.addEventListener("click", () => {
-            localStorage.setItem("selectedSubCategory",subCategory)
-            localStorage.setItem("selectedItem", index);
-            window.location.href = "../../Pages/ProductDetail.html";
+// Display sidebar with categories
+const displaySideBar = (subCategories) => {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.innerHTML = `
+      <h2 class="sidebar-heading">Categories</h2>
+      <div class="sidebar-container">
+        <div class="category selected" data-category="All">All</div>
+        ${subCategories.map(subCat => `
+          <div class="category" data-category="${subCat}">${subCat}</div>
+        `).join('')}
+      </div>
+      <div class="sorting-container">
+        <h3>Sort By</h3>
+        <button class="sort-button" data-sort="az">A-Z</button>
+        <button class="sort-button" data-sort="za">Z-A</button>
+        <button class="sort-button" data-sort="low-high">Price: Low to High</button>
+        <button class="sort-button" data-sort="high-low">Price: High to Low</button>
+      </div>
+    `;
+    
+    // Category selection
+    document.querySelectorAll(".category").forEach(category => {
+      category.addEventListener("click", () => {
+        const selectedCat = category.dataset.category;
+        localStorage.setItem("selectedSubCategory", selectedCat);
+        
+        document.querySelectorAll(".category").forEach(c => c.classList.remove("selected"));
+        category.classList.add("selected");
+        
+        let productsToShow = [];
+        if (selectedCat === "All") {
+          Object.values(fullData).forEach(subCatProducts => {
+            productsToShow = productsToShow.concat(subCatProducts);
+          });
+        } else {
+          productsToShow = fullData[selectedCat] || [];
+        }
+        
+        displayData(productsToShow, selectedCat);
+      });
+    });
+    
+    // Sorting functionality
+    document.querySelectorAll(".sort-button").forEach(button => {
+      button.addEventListener("click", () => {
+        const sortType = button.dataset.sort;
+        applySorting(sortType);
+        
+        document.querySelectorAll(".sort-button").forEach(btn => btn.classList.remove("selected"));
+        button.classList.add("selected");
+        localStorage.setItem("selectedSort", sortType);
+      });
+    });
+    
+    // Apply saved sort if exists
+    const savedSort = localStorage.getItem("selectedSort");
+    if (savedSort) {
+      const sortButton = document.querySelector(`.sort-button[data-sort="${savedSort}"]`);
+      if (sortButton) {
+        sortButton.click();
+      }
+    }
+  };
+
+
+   
+// Apply sorting
+const applySorting = (sortType) => {
+    const selectedSubCategory = localStorage.getItem("selectedSubCategory") || "All";
+    let products = [];
+    
+    if (selectedSubCategory === "All") {
+      Object.values(fullData).forEach(subCatProducts => {
+        products = products.concat(subCatProducts);
+      });
+    } else {
+      products = fullData[selectedSubCategory] || [];
+    }
+    
+    switch (sortType) {
+      case "az":
+        products.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "za":
+        products.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case "low-high":
+        products.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+        break;
+      case "high-low":
+        products.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        break;
+    }
+    
+    displayData(products, selectedSubCategory);
+  };
+
+
+const searchInput = document.getElementById("search-input");
+const searchButton = document.getElementById("search-button");
+const suggestionsList = document.getElementById("suggestions-list");
+
+
+
+function debounce(func, delay) {
+         let timer;
+        return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => func(...args), delay);
+        };
+    }
+
+// Fetch and Filter Products from Firebase on Every Search
+const productsRef = ref(database, "Products");
+
+const searchProducts = async (query) => {
+    if (!query.trim()) {
+        suggestionsList.innerHTML = "";
+        return;
+    }
+
+    try {
+        const snapshot = await get(productsRef);
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+          
+            let allProducts = [];
+      
+            Object.values(data).forEach(category => {
+              Object.values(category).forEach(subCategory => {
+                allProducts = allProducts.concat(subCategory);
+              });
+            });
+
+
+            let filtered = allProducts.filter(product =>
+                product.name.toLowerCase().includes(query.toLowerCase())
+            );
+
+            showSuggestions(filtered);
+        }
+    } catch (error) {
+        console.error("Error fetching products:", error);
+    }
+  };
+
+// Display Search Suggestions Dynamically
+const showSuggestions = (products) => {
+    suggestionsList.innerHTML = "";
+
+    if (products.length === 0) {
+        return;
+    }
+
+    products.slice(0, 5).forEach(product => {
+        const li = document.createElement("li");
+        li.textContent = product.name;
+        li.addEventListener("click", () => {
+            searchInput.value = product.name;
+            suggestionsList.innerHTML = "";
+            
+            showProductDetail(product, "Search Results", 0); 
         });
+        suggestionsList.appendChild(li);
     });
 };
 
-function displaySideBar(subCategories) {
-    const sidebar = document.getElementById("sidebar"); 
-    sidebar.innerHTML = "";
 
-    //  Add "Categories" Heading
-    const heading = document.createElement("h2");
-    heading.textContent = "Categories";
-    heading.classList.add("sidebar-heading");
-    sidebar.appendChild(heading);
+// Attach Debounced Search to Input Field
+searchInput.addEventListener("input", debounce(() => {
+    searchProducts(searchInput.value);
+    showSuggestions(filteredProducts);
+  }, 300));
 
-    //  Create a Container for Subcategory Items
-    const subCategoryContainer = document.createElement("div");
-    subCategoryContainer.classList.add("sidebar-container");
+// Search Button Click Event
+searchButton.addEventListener("click",async () => {
+  const query = searchProducts(searchInput.value.trim());
+   if (!query) return;
+    
+    const filteredProducts = await searchProducts(query);
+    if (filteredProducts.length > 0) {
+        showProductDetail(filteredProducts[0], "Search Results", 0);
+    } else {
+        alert("No products found matching your search");
+    } 
+});
 
-    //  Add "All" Category
-    const allCategoryItem = document.createElement("div");
-    allCategoryItem.classList.add("category");
-    allCategoryItem.textContent = "All";
-    subCategoryContainer.appendChild(allCategoryItem);
-
-    //  Add Subcategories
-    subCategories.forEach(subCategory => {
-        const subCategoryItem = document.createElement("div");
-        subCategoryItem.classList.add("category");
-        subCategoryItem.textContent = subCategory;
-        subCategoryContainer.appendChild(subCategoryItem);
-    });
-
-    sidebar.appendChild(subCategoryContainer);
-
-    //  Handle category selection
-    document.querySelectorAll(".category").forEach(category => {
-        category.addEventListener("click", () => {
-            localStorage.setItem("selectedSubCategory", category.textContent);
-     
-            //  Highlight selected category
-            document.querySelectorAll(".category").forEach(item => item.classList.remove("selected"));
-            category.classList.add("selected");
-
-            if (category.textContent === "All") {
-                subCategories.forEach(subCategory => {
-                    displayData(fullData[subCategory],subCategory, false);
-                });
-            } else {
-                displayData(fullData[category.textContent], category.textContent,true);
-            }
+// Product detail functionality
+const showProductDetail = (product, subCategory, index) => {
+  document.getElementById("productsContainer").style.display = "none";
+  document.getElementById("productDetail").style.display = "flex";
+  
+  document.getElementById("productImage").src = product.image;
+  document.getElementById("productName").textContent = product.name;
+  document.getElementById("productPrice").textContent = `₹${product.price}`;
+  document.getElementById("productDescription").textContent = 
+    product.description || "No description available";
+  
+  document.getElementById("addToCart").onclick = async () => {
+      const userId = localStorage.getItem("userId");
+      if (!userId) {
+        showPopup("Please login to add items to cart");
+        return;
+      }
+      
+      // Create a unique path for the product
+      const productPath = `${selectedCategory}_${subCategory}_${index}`;
+      const cartRef = ref(database, `cart/${userId}/${productPath}`);
+      
+      try {
+        const snapshot = await get(cartRef);
+        let currentCount = snapshot.exists() ? snapshot.val().count || 0 : 0;
+        const newCount = currentCount + 1;
+        
+        // Store the entire product data along with count
+        await set(cartRef, {
+          ...product,
+          count: newCount,
+          path: productPath  // Store the path for reference
         });
-
-        //  Set initial selection highlight
-        if (category.textContent === localStorage.getItem("selectedSubCategory")) {
-            category.classList.add("selected");
+        
+        // Update cart count
+        let cartCount = parseInt(localStorage.getItem("cartCount")) || 0;
+        if (currentCount === 0) {
+          cartCount += 1;
+          localStorage.setItem("cartCount", cartCount);
+          document.getElementById("cart-count").textContent = cartCount;
         }
-    });
+        
+        showPopup("Added to Cart Successfully");
+      } catch (error) {
+        console.error("Error adding to cart:", error);
+        showPopup("Failed to add to cart");
+      }
+    };
+  
+  document.getElementById("buyNow").onclick = () => {
+    localStorage.setItem("isFromCartPage", false);
+    window.location.href = "checkout.html";
+  };
+};
 
-    //  Add Sorting Options Below Categories
-    const sortingContainer = document.createElement("div");
-    sortingContainer.classList.add("sorting-container");
 
-    const sortingTitle = document.createElement("h3");
-    sortingTitle.textContent = "Sort By";
-    sortingContainer.appendChild(sortingTitle);
+document.getElementById("closeDetail").addEventListener("click", () => {
+  document.getElementById("productDetail").style.display = "none";
+  document.getElementById("productsContainer").style.display = "flex";
+});
 
-    const sortOptions = [
-        { label: "A-Z", value: "az" },
-        { label: "Z-A", value: "za" },
-        { label: "Price: Low to High", value: "low-high" },
-        { label: "Price: High to Low", value: "high-low" },
-    ];
+function showPopup(message) {
+  const popup = document.getElementById("popupMessage");
+  if (!popup) return;
 
-    sortOptions.forEach(option => {
-        const button = document.createElement("button");
-        button.classList.add("sort-button");
-        button.textContent = option.label;
-        button.dataset.sort = option.value;
-        button.addEventListener("click", () => {
-            applySorting(option.value);
+  popup.textContent = message;
+  popup.classList.add("show");
 
-            //  Highlight selected sorting option
-            document.querySelectorAll(".sort-button").forEach(btn => btn.classList.remove("selected"));
-            button.classList.add("selected");
-            localStorage.setItem("selectedSort", option.value);
-        });
-
-        sortingContainer.appendChild(button);
-    });
-
-    sidebar.appendChild(sortingContainer);
-
-    //  Set initial sort selection
-    const savedSort = localStorage.getItem("selectedSort");
-    if (savedSort) {
-        document.querySelector(`.sort-button[data-sort="${savedSort}"]`)?.classList.add("selected");
-    }
+  setTimeout(() => {
+    popup.classList.remove("show");
+  }, 3000); // Matches your visibility duration
 }
 
-//  Sorting Function
-function applySorting(sortType) {
-    let selectedSubCategory = localStorage.getItem("selectedSubCategory");
-    let items = selectedSubCategory === "All" 
-        ? Object.values(fullData).flat() 
-        : fullData[selectedSubCategory];
-
-    if (!Array.isArray(items) || items.length === 0) return;
-
-    switch (sortType) {
-        case "az":
-            items.sort((a, b) => a.name.localeCompare(b.name));
-            break;
-        case "za":
-            items.sort((a, b) => b.name.localeCompare(a.name));
-            break;
-        case "low-high":
-            items.sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0));
-            break;
-        case "high-low":
-            items.sort((a, b) => (Number(b.price) || 0) - (Number(a.price) || 0));
-            break;
-    }
-
-    displayData(items, true);
-}
-
-
-document.addEventListener("DOMContentLoaded", fetchData);
+// Update cart count on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const cartCount = localStorage.getItem("cartCount") || 0;
+  document.getElementById("cart-count").textContent = cartCount;
+});
+  

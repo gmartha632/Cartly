@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking - Cartly</title>
+    <link rel="stylesheet" href="../Assets/Styles/tracking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <header>
+        <!-- Cartly logo -->
+        <div>
+          <a href="../index.html">
+            <img src="https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Dashboard/ic_logo.jpeg"
+              alt=" Cartly_logo">
+            <h2>Cartly</h2>
+          </a>
+        </div>
+    
+      <h1 style="color: blue;">Track Your Orders</h1>
+    
+       <div class="header-icons">
+            <!-- Cart -->
+            <button class="cart" id="cart-icon">
+              <p><i class="fa-solid fa-cart-shopping"></i></p>
+              <span id="cart-count">0</span> <!-- Cart count badge -->
+          </button>
+            <!-- Profile -->
+            <button id="profile">
+              <p><i class="fa-solid fa-user"></i></p>
+              <div id="profile-dropdown" class="profile-dropdown">
+                <p  id="logout"></p>
+              </div>
+            </button>
+          </div>
+      </header>
+
+  <main class="tracking-container">
+    <div class="tracking-header">
+      <div class="search-orders">
+        <input type="text" id="order-search" placeholder="Search by order ID...">
+        <button id="search-btn"><i class="fas fa-search"></i></button>
+      </div>
+      <button id="view-all-orders">View All My Orders</button>
+    </div>
+
+    <div class="order-list" id="order-list">
+      <!-- Orders will be dynamically inserted here -->
+      <div class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Loading your orders...</p>
+      </div>
+    </div>
+
+    <div class="order-details-modal" id="order-modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 id="modal-order-id">Order #</h2>
+        <div class="order-status-timeline" id="status-timeline">
+          <!-- Status timeline will be inserted here -->
+        </div>
+        <div class="order-details-grid">
+          <div class="order-items" id="modal-order-items">
+            <!-- Order items will be inserted here -->
+          </div>
+          <div class="order-summary">
+            <h3>Order Summary</h3>
+            <div class="summary-row">
+              <span>Subtotal:</span>
+              <span id="modal-subtotal">₹0.00</span>
+            </div>
+            <div class="summary-row">
+              <span>Shipping:</span>
+              <span>FREE</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total:</span>
+              <span id="modal-total">₹0.00</span>
+            </div>
+            <div class="shipping-info">
+              <h3>Shipping Information</h3>
+              <p id="modal-shipping-name"></p>
+              <p id="modal-shipping-address"></p>
+              <p id="modal-shipping-email"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  
+
+  <script src="../Assets/Script/tracking.js" type="module"></script>
+  <script src="../Assets/Script/navFunctionality.js" type="module"></script>
+</body>
+</html>

@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Cartly</title>
-    <link rel="stylesheet" href="../Assets/Styles/Checkout.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
-    integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartly</title>
+  <link rel="stylesheet" href="../Assets/Styles/Checkout.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+</head>
+
+<body>
   <header>
     <!-- Cartly logo -->
     <div>
@@ -21,32 +22,42 @@
       </a>
     </div>
 
-    <!-- Search bar  -->
-    <div>
-      <h1 style="color: blue;">Checkout</h1>
+     <h1 style="color: blue;">Checkout</h1>
 
+     <div class="header-icons">
+  <!-- Cart -->
+  <button class="cart" id="cart-icon">
+    <p><i class="fa-solid fa-cart-shopping"></i></p>
+    <span id="cart-count">0</span> 
+  </button>
+  <!-- Profile -->
+  <div class="profile-container">
+    <button id="profile">
+      <p><i class="fa-solid fa-user"></i></p>
+    </button>
+    <div id="profile-dropdown" class="profile-dropdown">
+      <p id="my-orders"><i class="fas fa-box-open"></i> My Orders</p>
+      <p id="logout"><i class="fa-solid fa-power-off"></i> <span id="logout-text">Logout</span></p>     
     </div>
-    <!-- Suggestions dropdown -->
-    <ul id="suggestions-list" class="suggestions-list"></ul>
+  </div>
+</div>
 
-    <div>
-      <div>
-        <!-- Cart -->
-        <button class="cart" id="cart-icon">
-          <p><i class="fa-solid fa-cart-shopping"></i></p>
-          <span id="cart-count">0</span> <!-- Cart count badge -->
-      </button>
-        <!-- Profile -->
-        <button id="profile">
-          <p><i class="fa-solid fa-user"></i></p>
-          <div id="profile-dropdown" class="profile-dropdown">
-            <p  id="logout"></p>
-          </div>
-        </button>
+  <!-- Logout Confirmation Modal -->
+  <div class="modal-overlay" id="logout-modal">
+    <div class="modal-content">
+      <h3 class="modal-title">Logout Confirmation</h3>
+      <p class="modal-message">Are you sure you want to logout?</p>
+      <div class="modal-buttons">
+        <button class="modal-button modal-button-cancel" id="cancel-logout">Cancel</button>
+        <button class="modal-button modal-button-confirm" id="confirm-logout">Logout</button>
       </div>
+    </div>
+  </div>
   </header>
 
-<div class="checkout-container">
+
+
+  <div class="checkout-container">
     <!-- Left Side: Shipping Details -->
     <div class="checkout-form">
         <h2>Shipping Details</h2>
@@ -77,9 +88,25 @@
     </div>
 </div>
 
-<script src="../Assets/Script/Checkout.js" type="module"></script>
-<script src="../Assets/Script/navFunctionality.js" type="module"></script>
 
+<!-- Success Modal -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <div class="success-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <h3>Order Placed Successfully!</h3>
+    <p>Your order has been placed and will be processed shortly.</p>
+    <button id="continueShopping">Continue Shopping</button>
+  </div>
+</div>
+  
+  
+    <script src="../Assets/Script/navFunctionality.js" type="module"></script>
+   <script src="../Assets/Script/Checkout.js" type="module"></script>
+ 
 
 </body>
+
 </html>

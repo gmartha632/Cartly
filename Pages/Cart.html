@@ -23,44 +23,79 @@
       </a>
     </div>
 
-    <h1>Cart</h1>
-    <!-- Suggestions dropdown -->
-    <ul id="suggestions-list" class="suggestions-list"></ul>
+  <h1 style="color: blue;">Cart</h1>
 
-    <div>
-      <div>
+   <div class="header-icons">
         <!-- Cart -->
         <button class="cart" id="cart-icon">
           <p><i class="fa-solid fa-cart-shopping"></i></p>
           <span id="cart-count">0</span> <!-- Cart count badge -->
       </button>
         <!-- Profile -->
-        <button id="profile">
-          <p><i class="fa-solid fa-user"></i></p>
-          <div id="profile-dropdown" class="profile-dropdown">
-            <p  id="logout"></p>
-          </div>
-        </button>
+  <div class="profile-container">
+    <button id="profile">
+      <p><i class="fa-solid fa-user"></i></p>
+    </button>
+    <div id="profile-dropdown" class="profile-dropdown">
+      <p id="my-orders"><i class="fas fa-box-open"></i> My Orders</p>
+      <p id="logout"><i class="fa-solid fa-power-off"></i> <span id="logout-text">Logout</span></p>     
+    </div>
+  </div>
+</div>
+
+  <!-- Logout Confirmation Modal -->
+  <div class="modal-overlay" id="logout-modal">
+    <div class="modal-content">
+      <h3 class="modal-title">Logout Confirmation</h3>
+      <p class="modal-message">Are you sure you want to logout?</p>
+      <div class="modal-buttons">
+        <button class="modal-button modal-button-cancel" id="cancel-logout">Cancel</button>
+        <button class="modal-button modal-button-confirm" id="confirm-logout">Logout</button>
       </div>
+    </div>
+  </div>
   </header>
 
 
 
-  <div id="mainContainer">
+    <div id="mainContainer">
     <div class="cart-container">
-      <h1>Your Cart</h1>
+      <p>Your Shopping Cart</p>
       <div id="cartItems">
-          <!-- Cart items will be dynamically added here -->
+        <!-- Cart items will be dynamically added here -->
       </div>
-  
-      <p class="total">Total: ₹<span id="totalPrice">0</span></p>
-  
+      
+      
+       <div class="summary-row total">
+          <span>Total</span>
+          <span id="totalPrice">₹0</span>
+        </div>
+        
+      
+
       <div class="cart-buttons">
-          <button id="continueShopping">Continue Shopping</button>
-          <button id="checkout">Checkout</button>
+        <button id="continueShopping" class="secondary-btn">
+          <i class="fas fa-arrow-left"></i> Continue Shopping
+        </button>
+        <button id="checkout" class="primary-btn">
+          Proceed to Checkout <i class="fas fa-arrow-right"></i>
+        </button>
       </div>
+    </div>
   </div>
+
+  <!-- Remove Item Confirmation Modal -->
+<div class="modal-overlay" id="remove-modal">
+  <div class="modal-content">
+    <h3 class="modal-title">Remove Item</h3>
+    <p class="modal-message">Are you sure you want to remove this item from your cart?</p>
+    <div class="modal-buttons">
+      <button class="modal-button modal-button-cancel" id="cancel-remove">Cancel</button>
+      <button class="modal-button modal-button-confirm" id="confirm-remove">Remove</button>
+    </div>
   </div>
+</div>
+
 
   <script src="../Assets/Script/navFunctionality.js" type="module"></script>
   <script src="../Assets/Script/Cart.js" type="module">
