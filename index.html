@@ -1,70 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cartly</title>
+    <link rel="stylesheet" href="./Assets/Styles/Dashboard.css" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cartly</title>
-  <link rel="stylesheet" href="./Assets/Styles/Dashboard.css">
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
 
-<body>
-  <header>
-    <!-- Cartly logo -->
-    <div>
-      <a href="../index.html">
-        <img src="https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Dashboard/ic_logo.jpeg"
-          alt=" Cartly_logo">
-        <h2>Cartly</h2>
-      </a>
-    </div>
-
-  
-
-     <div class="header-icons">
-  <!-- Cart -->
-  <button class="cart" id="cart-icon">
-    <p><i class="fa-solid fa-cart-shopping"></i></p>
-    <span id="cart-count">0</span> 
-  </button>
-  <!-- Profile -->
-  <div class="profile-container">
-    <button id="profile">
-      <p><i class="fa-solid fa-user"></i></p>
-    </button>
-    <div id="profile-dropdown" class="profile-dropdown">
-      <p id="my-orders"><i class="fas fa-box-open"></i> My Orders</p>
-      <p id="logout"><i class="fa-solid fa-power-off"></i> <span id="logout-text">Logout</span></p>     
-    </div>
-  </div>
-</div>
-
-  <!-- Logout Confirmation Modal -->
-  <div class="modal-overlay" id="logout-modal">
-    <div class="modal-content">
-      <h3 class="modal-title">Logout Confirmation</h3>
-      <p class="modal-message">Are you sure you want to logout?</p>
-      <div class="modal-buttons">
-        <button class="modal-button modal-button-cancel" id="cancel-logout">Cancel</button>
-        <button class="modal-button modal-button-confirm" id="confirm-logout">Logout</button>
+  <body>
+    <header>
+      <!-- Cartly logo -->
+      <div>
+        <a href="../index.html">
+          <img
+            src="https://xtdcqlytigqdvrptocxx.supabase.co/storage/v1/object/public/Assets/Dashboard/ic_logo.jpeg"
+            alt=" Cartly_logo"
+          />
+          <h2>Cartly</h2>
+        </a>
       </div>
-    </div>
-  </div>
-  </header>
 
+      <div class="header-icons">
+        <!-- Cart -->
+        <button class="cart" id="cart-icon">
+          <p><i class="fa-solid fa-cart-shopping"></i></p>
+          <span id="cart-count">0</span>
+        </button>
+        <!-- Profile -->
+        <div class="profile-container">
+          <button id="profile">
+            <p><i class="fa-solid fa-user"></i></p>
+          </button>
+          <div id="profile-dropdown" class="profile-dropdown">
+            <p id="my-orders"><i class="fas fa-box-open"></i> My Orders</p>
+            <p id="logout">
+              <i class="fa-solid fa-power-off"></i>
+              <span id="logout-text">Logout</span>
+            </p>
+          </div>
+        </div>
+      </div>
 
+      <!-- Logout Confirmation Modal -->
+      <div class="modal-overlay" id="logout-modal">
+        <div class="modal-content">
+          <h3 class="modal-title">Logout Confirmation</h3>
+          <p class="modal-message">Are you sure you want to logout?</p>
+          <div class="modal-buttons">
+            <button class="modal-button modal-button-cancel" id="cancel-logout">
+              Cancel
+            </button>
+            <button
+              class="modal-button modal-button-confirm"
+              id="confirm-logout"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
 
-  <div class="dashboard-container" id="dashboard"></div>
-  
-  <script src="./Assets/Script/Dashboard.js" type="module">
-  </script>
+    <div class="dashboard-container" id="dashboard"></div>
+
+    <script src="./Assets/Script/Dashboard.js" type="module"></script>
     <script src="./Assets//Script//navFunctionality.js" type="module"></script>
-
- 
-
-</body>
-
+  </body>
 </html>
