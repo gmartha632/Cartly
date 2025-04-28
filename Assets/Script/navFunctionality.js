@@ -1,75 +1,110 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+import { auth, database } from "./firebaseConfig.js";
 import {
-  getAuth,
+  onAuthStateChanged,
   signOut,
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-import { getDatabase, ref, get,set } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+import { ref, get } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
-// Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCTj8qVmWz9kWq6wxuSCDYE3iljRQZTCFE",
-  authDomain: "cartly-314cd.firebaseapp.com",
-  projectId: "cartly-314cd",
-  storageBucket: "cartly-314cd.firebasestorage.app",
-  messagingSenderId: "1075164553188",
-  appId: "1:1075164553188:web:8e9a88d063d1541d8371f1",
-  measurementId: "G-4LPYG75NPM",
-};
+document.addEventListener("DOMContentLoaded", () => {
+  // Initialize elements
+  const logoutButton = document.getElementById("logout");
+  const cart = document.getElementById("cart-icon");
+  const logoutModal = document.getElementById("logout-modal");
+  const cancelLogout = document.getElementById("cancel-logout");
+  const confirmLogout = document.getElementById("confirm-logout");
+  const myOrdersBtn = document.getElementById("my-orders");
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-const auth = getAuth(app);
+  // Auth state observer
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userId", user.uid);
+      document.getElementById("logout-text").textContent = "Log out";
+      fetchCartCount(user.uid);
+    } else {
+      localStorage.setItem("isLoggedIn", "false");
+      localStorage.removeItem("userId");
+      document.getElementById("logout-text").textContent = "Log in";
+    }
+  });
 
+  // Cart click handler
+  if (cart) {
+    cart.addEventListener("click", () => {
+      window.location.href = "../../Pages/Cart.html";
+    });
+  }
 
-
-let userId=localStorage.getItem("userId")
-
-let isLoggedIn = localStorage.getItem("isLoggedIn");
-const logoutButton = document.getElementById("logout");
-logoutButton.textContent = isLoggedIn ? "Log out" : "Log in";
-
-logoutButton.addEventListener("click", () => {
-  if (isLoggedIn) {
-    signOut(auth)
-      .then(() => {
-        console.log("User signed out successfully");
-        localStorage.setItem("isLoggedIn", false);
+  // My Orders click handler
+  if (myOrdersBtn) {
+    myOrdersBtn.addEventListener("click", () => {
+      const userId = localStorage.getItem("userId");
+      if (!userId) {
         window.location.href = "../../Pages/Login.html";
-      })
-      .catch((error) => {
+        return;
+      }
+      window.location.href = "../../Pages/tracking.html";
+    });
+  }
+
+  // Logout button click handler
+  if (logoutButton) {
+    logoutButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      
+      if (isLoggedIn) {
+        logoutModal.classList.add("active");
+      } else {
+        window.location.href = "../../Pages/Login.html";
+      }
+    });
+  }
+
+  // Cancel logout handler
+  if (cancelLogout) {
+    cancelLogout.addEventListener("click", () => {
+      logoutModal.classList.remove("active");
+    });
+  }
+
+  // Confirm logout handler
+  if (confirmLogout) {
+    confirmLogout.addEventListener("click", () => {
+      signOut(auth).then(() => {
+        logoutModal.classList.remove("active");
+        localStorage.setItem("isLoggedIn", "false");
+        localStorage.removeItem("userId");
+        window.location.href = "../../Pages/Login.html";
+      }).catch((error) => {
         console.error("Error signing out:", error);
       });
-  } else {
-    window.location.href = "../../Pages/Login.html";
+    });
   }
-});
 
+  // Close modal when clicking outside
+  if (logoutModal) {
+    logoutModal.addEventListener("click", (e) => {
+      if (e.target === logoutModal) {
+        logoutModal.classList.remove("active");
+      }
+    });
+  }
 
-let cart = document.getElementById("cart-icon");
-cart.addEventListener("click", () => {
-  window.location.href = "../../Pages/Cart.html";
-});
-
-
-
-
-async function fetchCartCount() {
-  try {
-    const cartRef = ref(database, `cart/${userId}`); // Ensure it targets the user's cart   
-    const snapshot = await get(cartRef);
-    if (snapshot.exists()) {
-      let data=snapshot.val()
-      console.log(data);
-      let count=Object.keys(data).length;
-      localStorage.setItem("cartCount",count)
-      document.getElementById("cart-count").textContent =count;
-    } else {
-      console.log("No data available");
+  // Fetch cart count function
+  async function fetchCartCount(userId) {
+    try {
+      const cartRef = ref(database, `cart/${userId}`);
+      const snapshot = await get(cartRef);
+      if (snapshot.exists()) {
+        const count = Object.keys(snapshot.val()).length;
+        document.getElementById("cart-count").textContent = count;
+      } else {
+        document.getElementById("cart-count").textContent = 0;
+      }
+    } catch (err) {
+      console.error("Error fetching cart count:", err);
+      document.getElementById("cart-count").textContent = 0;
     }
-  } catch (error) {
-    console.error("Error fetching data:", error);
   }
-}
-
-fetchCartCount()
+});

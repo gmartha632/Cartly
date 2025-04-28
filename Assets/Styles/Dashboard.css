@@ -1,250 +1,259 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    --fonts: poppins;
-    --background-color: #38b6ff;
+  --fonts: poppins;
+  --background-color: #38b6ff;
+  --secondary-color: #007bff;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
 }
 
 body {
-
-    font-family:var(--fonts);
-    background-color: #f9f9f9;
+  font-family: var(--fonts);
+  background-color: #f9f9f9;
+  padding: 80px;
 }
 
-/* Search Navigation */
-header h2 {
-    font-family: var(--fonts);
-}
-
+/* Header Styles */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 2rem;
-    background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000000;
 }
 
 header div a {
-    display: flex;
-    color: inherit;
-    text-decoration: none;
-}
-
-
-header>div:last-child {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+  display: flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+  gap: 10px;
 }
 
 header img {
-    height: 40px;
+  height: 40px;
 }
 
-.search-bar {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    padding: 5px 10px;
-    width: 650px;
+header h2 {
+  font-size: 1.5rem;
+  font-family: var(--fonts);
+}
+/* Header icons*/
+.header-icons {
+  display: flex;
+  gap: 20px;
 }
 
-.search-bar input {
-    border: none;
-    outline: none;
-    flex: 1;
-    font-size: 16px;
-    padding: 5px;
-    font-family: var(--fonts);
-}
-
-.search-bar button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-}
-
+#cart-icon,
 #profile {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    display: inline-block;
-    width: 50px;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--dark-color);
 }
 
-/* Profile dropdown menu */
+#cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cart and Profile icons  */
+p i {
+  font-size: 20px;
+  transition: all 300ms ease;
+}
+p i:hover {
+  color: var(--background-color);
+  transform: scale(0.9);
+}
+
 .profile-dropdown {
-    display: none;
-    position: absolute;
-    top: 43px;
-    /* Adjust the position of the dropdown */
-    right: 0;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    z-index: 100000;
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 4px;
+  padding: 10px 0;
 }
 
 .profile-dropdown p {
-    display: block;
-    padding: 10px;
-    color: #333;
-    text-decoration: none;
-    font-size: 14px;
-    transition: background-color 0.3s;
+  color: #333;
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  margin: 0;
+  text-align: left;
+  font-size: 14px;
 }
 
 .profile-dropdown p:hover {
-    background-color: var(--background-color);
-    /* Change to your desired hover color */
-    color: white;
+  background-color: #f1f1f1;
 }
 
-/* Show dropdown on hover */
-#profile:hover .profile-dropdown {
-    display: block;
+.profile-dropdown p i {
+  margin-right: 8px;
+  width: 20px;
+  text-align: center;
 }
 
-#cart-icon {
-    position: relative;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-  }
-  
-  #cart-count {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: red;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 50%;
-    width: 18px;
-    height: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-
-p i {
-    font-size: 20px;
-    transition: all 300ms ease;
-
+.profile-container:hover .profile-dropdown {
+  display: block;
 }
 
-p i:hover {
-    color: var(--background-color);
-    transform: scale(.9);
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
 }
 
-/* Navbar */
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: var(--background-color);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    position: relative;
-    font-family: var(--fonts);
-    z-index: 20000;
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
 }
 
-.navbar a {
-    color: black;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 16px;
-    transition: all 300ms ease;
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-20px);
+  transition: transform 0.3s ease;
 }
 
-.navbar a:hover {
-    color: white;
-    transform: scale(.95);
-
+.modal-overlay.active .modal-content {
+  transform: translateY(0);
 }
 
-.navbar a:active {
-    font-weight: bold;
-    transform: scale(1.03);
-
+.modal-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
 }
 
-
-/* Hide the button when the input is focused */
-.search-bar button {
-    transition: opacity 0.3s ease, visibility 0s 0.3s;
+.modal-message {
+  margin-bottom: 1.5rem;
+  color: #555;
 }
 
-.search-bar button.hide {
-    opacity: 0;
-    visibility: hidden;
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }
 
+.modal-button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+}
+
+.modal-button-cancel {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.modal-button-confirm {
+  background-color: #ff3b30;
+  color: white;
+}
+
+.modal-button-cancel:hover {
+  background-color: #e0e0e0;
+}
+
+.modal-button-confirm:hover {
+  background-color: #e0352b;
+}
+
+/* Card for products */
 
 .dashboard-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 70%;
-    gap: 40px;
-    margin:100px auto;
-
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 70%;
+  gap: 40px;
+  margin: 100px auto;
 }
 
 .card {
-    width: 250px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    transition: transform 0.3s;
-    cursor: pointer;
+  width: 250px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: transform 0.3s;
+  cursor: pointer;
 }
 
 .card:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
 }
 
 .card-content {
-    padding: 15px;
+  padding: 15px;
 }
 
 .card h3 {
-    margin: 10px 0;
-    color: #007bff;
+  margin: 10px 0;
+  color: #007bff;
 }
 
 .card p {
-    font-size: 14px;
-    color: #555;
+  font-size: 14px;
+  color: #555;
 }
